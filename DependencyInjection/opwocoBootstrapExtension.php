@@ -9,10 +9,10 @@
 
 namespace opwoco\Bundle\BootstrapBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class opwocoBootstrapExtension extends Extension
 {
@@ -56,7 +56,7 @@ class opwocoBootstrapExtension extends Extension
          * Menu
          */
         if ($this->isConfigEnabled($container, $config['menu']) || $this->isConfigEnabled($container, $config['navbar'])) {
-            // TODO: remove this BC layer
+            // @deprecated: remove this BC layer
             if ($this->isConfigEnabled($container, $config['navbar'])) {
                 trigger_error(sprintf('opwoco_bootstrap.navbar is deprecated. Use opwoco_bootstrap.menu.'), E_USER_DEPRECATED);
             }

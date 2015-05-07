@@ -9,14 +9,14 @@
 
 namespace opwoco\Bundle\BootstrapBundle\Command;
 
+use Mopa\Bridge\Composer\Adapter\ComposerAdapter;
+use Mopa\Bridge\Composer\Util\ComposerPathFinder;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
-use Mopa\Bridge\Composer\Adapter\ComposerAdapter;
-use Mopa\Bridge\Composer\Util\ComposerPathFinder;
 
 /**
  * Command to check and create bootstrap symlink into OpwocoBootstrapBundle
@@ -216,12 +216,12 @@ EOF
 ;
         $this->output->writeln(array(
             '',
-            $this->getHelperSet()->get('formatter')->formatBlock($text, $style = 'bg=blue;fg=white', true),
+            $this->getHelperSet()->get('formatter')->formatBlock($text, 'bg=blue;fg=white', true),
             '',
         ));
 
         if ($this->input->isInteractive() && !$dialog->askConfirmation($this->output, '<question>Should this link be created? (y/n)</question>', false)) {
-            exit;
+            throw new \Exception("Aborting due to User not cofirming!");
         }
 
         return array($symlinkTarget, $symlinkName);

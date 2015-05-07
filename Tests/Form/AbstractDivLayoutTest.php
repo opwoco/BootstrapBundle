@@ -11,11 +11,13 @@ use opwoco\Bundle\BootstrapBundle\Form\Extension\TabbedFormTypeExtension;
 use opwoco\Bundle\BootstrapBundle\Form\Extension\WidgetFormTypeExtension;
 use opwoco\Bundle\BootstrapBundle\Twig\FormExtension as FormExtension2;
 use opwoco\Bundle\BootstrapBundle\Twig\IconExtension;
+
 use Symfony\Bridge\Twig\Extension\FormExtension;
 use Symfony\Bridge\Twig\Extension\TranslationExtension;
 use Symfony\Bridge\Twig\Form\TwigRenderer;
 use Symfony\Bridge\Twig\Form\TwigRendererEngine;
 use Symfony\Bridge\Twig\Tests\Extension\Fixtures\StubTranslator;
+use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\FormIntegrationTestCase;
@@ -29,7 +31,7 @@ abstract class AbstractDivLayoutTest extends FormIntegrationTestCase
     protected function setUp()
     {
         // Setup factory for tabs
-        $this->tabFactory = \Symfony\Component\Form\Forms::createFormFactory();
+        $this->tabFactory = Forms::createFormFactory();
 
         parent::setUp();
 
@@ -60,7 +62,7 @@ abstract class AbstractDivLayoutTest extends FormIntegrationTestCase
 
         $environment = new Twig_Environment($loader, array('strict_variables' => true));
         $environment->addExtension(new TranslationExtension(new StubTranslator()));
-        $environment->addExtension(new IconExtension('fontawesome'));
+ //       $environment->addExtension(new IconExtension('fontawesome'));
         $environment->addExtension(new FormExtension2());
         $environment->addGlobal('global', '');
         $environment->addExtension($this->extension);
@@ -77,6 +79,7 @@ abstract class AbstractDivLayoutTest extends FormIntegrationTestCase
                 $this->getLegendFormTypeExtension(),
                 $this->getHorizontalFormTypeExtension(),
                 $this->getErrorTypeFormTypeExtension(),
+                $this->getEmbedFormExtension(),
                 $this->getTabbedFormTypeExtension(),
             ),
             'text' => array(
@@ -147,6 +150,12 @@ abstract class AbstractDivLayoutTest extends FormIntegrationTestCase
     {
         return new ErrorTypeFormTypeExtension(array(
             'error_type' => null,
+        ));
+    }
+    protected function getEmbedFormExtension()
+    {
+        return new EmbedFormExtension(array(
+            'embed_form' => true,
         ));
     }
 

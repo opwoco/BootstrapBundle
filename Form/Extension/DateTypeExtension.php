@@ -1,22 +1,26 @@
 <?php
 
 /*
- * This file is part of the OpwocoBootstrapBundle.
+ * This file is part of the MopaBootstrapBundle.
+ *
+ * (c) Philipp A. Mohrenweiser <phiamo@googlemail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace opwoco\Bundle\BootstrapBundle\Form\Extension;
+namespace Mopa\Bundle\BootstrapBundle\Form\Extension;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Extension for Date type.
  *
+ * @author phiamo <phiamo@googlemail.com>
  */
 class DateTypeExtension extends AbstractTypeExtension
 {
@@ -30,7 +34,7 @@ class DateTypeExtension extends AbstractTypeExtension
      *
      * @param array $options
      */
-    public function __construct(array $options = null)
+    public function __construct(array $options)
     {
         $this->options = $options;
     }
@@ -40,8 +44,13 @@ class DateTypeExtension extends AbstractTypeExtension
      */
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
-        if ('single_text' === $options['widget'] && isset($options['datepicker'])) {
-            $view->vars['datepicker'] = $options['datepicker'];
+        if ('single_text' === $options['widget']){
+            if (isset($options['datepicker'])) {
+                $view->vars['datepicker'] = $options['datepicker'];
+            }
+            if (isset($options['widget_reset_icon'])) {
+                $view->vars['widget_reset_icon'] = $options['widget_reset_icon'];
+            }
         }
 
         $view->vars['date_wrapper_class'] = $options['date_wrapper_class'];
@@ -49,13 +58,24 @@ class DateTypeExtension extends AbstractTypeExtension
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated Remove it when bumping requirements to SF 2.7+
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        $this->configureOptions($resolver);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
         $resolver->setOptional(array(
             'datepicker',
+            'widget_reset_icon',
         ))->setDefaults(array(
-            'date_wrapper_class' => $this->options['date_wrapper_class'],
+            'date_wrapper_class' => $this->options['date_wrapper_class']
         ));
     }
 

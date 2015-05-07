@@ -9,10 +9,11 @@
 
 namespace opwoco\Bundle\BootstrapBundle\Form\Extension;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Extension for Time type.
@@ -25,18 +26,34 @@ class TimeTypeExtension extends AbstractTypeExtension
      */
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
-        if ('single_text' === $options['widget'] && isset($options['timepicker'])) {
-            $view->vars['timepicker'] = $options['timepicker'];
+        if ('single_text' === $options['widget']){
+            if (isset($options['timepicker'])) {
+                $view->vars['timepicker'] = $options['timepicker'];
+            }
+            if (isset($options['widget_reset_icon'])) {
+                $view->vars['widget_reset_icon'] = $options['widget_reset_icon'];
+            }
         }
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated Remove it when bumping requirements to SF 2.7+
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        $this->configureOptions($resolver);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
         $resolver->setOptional(array(
             'timepicker',
+            'widget_reset_icon',
         ));
     }
 

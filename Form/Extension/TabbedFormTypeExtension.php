@@ -1,20 +1,23 @@
 <?php
 
 /*
- * This file is part of the OpwocoBootstrapBundle.
+ * This file is part of the MopaBootstrapBundle.
+ *
+ * (c) Philipp A. Mohrenweiser <phiamo@googlemail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace opwoco\Bundle\BootstrapBundle\Form\Extension;
+namespace Mopa\Bundle\BootstrapBundle\Form\Extension;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Mopa\Bundle\BootstrapBundle\Form\Type\TabsType;
 use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\FormFactoryInterface;
-use opwoco\Bundle\BootstrapBundle\Form\Type\TabsType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Extension for Adding Tabs to Form type.
@@ -53,8 +56,18 @@ class TabbedFormTypeExtension extends AbstractTypeExtension
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated Remove it when bumping requirements to SF 2.7+
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $this->configureOptions($resolver);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'tabs_class' => $this->options['class'],

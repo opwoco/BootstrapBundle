@@ -70,15 +70,17 @@
                 prototype_label = '__name__label__';
             }
 
-            var name_replace_pattern = new RegExp(prototype_name, 'g');
-            var label_replace_pattern = new RegExp(prototype_label, 'g');
+            var name_replace_pattern = new RegExp("((\"|&quot;|&amp;quot;|'|&#039;|&amp;#039;)((?!(\"|&quot;|&amp;quot;|'|&#039;|&amp;#039;|" + prototype_name + ")).)+?)(" + prototype_name + ")", 'ig');
+            var label_replace_pattern = new RegExp("((\"|&quot;|&amp;quot;|'|&#039;|&amp;#039;)((?!(\"|&quot;|&amp;quot;|'|&#039;|&amp;#039;|" + prototype_label + ")).)+?)(" + prototype_label + ")", 'ig');
             var rowContent = $collection.attr('data-prototype')
-                .replace(label_replace_pattern, index)
-                .replace(name_replace_pattern, index);
-            var row = $(rowContent);
-            if (false !== $(window).triggerHandler('before-add.opwoco-collection-item', [$collection, row, index])) {
-                $collection.append(row);
-                $(window).triggerHandler('add.opwoco-collection-item', [$collection, row, index])
+                    .replace(/\n/g, '')
+                    .replace(label_replace_pattern, "$1" + index)
+                    .replace(name_replace_pattern, "$1" + index);
+            var $row = $(rowContent);
+
+            if (false !== $(window).triggerHandler('before-add.opwoco-collection-item', [$collection, $row, index])) {
+                $collection.append($row);
+                $(window).triggerHandler('add.mopa-collection-item', [$collection, $row, index])
             }
         },
         remove: function (row) {
