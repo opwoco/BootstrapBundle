@@ -9,8 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Mopa\Bundle\BootstrapBundle\Command;
-
+namespace opwoco\Bundle\BootstrapBundle\Command;
 use Mopa\Bridge\Composer\Adapter\ComposerAdapter;
 use Mopa\Bridge\Composer\Util\ComposerPathFinder;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -36,7 +35,7 @@ class InstallFontCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('mopa:bootstrap:install:font')
+            ->setName('opwoco:bootstrap:install:font')
             ->setDescription("Install font to web/fonts")
             ->setHelp(<<<EOT
 The <info>mopa:bootstrap:install:font</info> command install the font configured to used into web/fonts directory
