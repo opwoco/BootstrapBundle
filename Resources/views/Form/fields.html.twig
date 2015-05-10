@@ -73,8 +73,12 @@
 {% block form_widget_simple %}
 {% spaceless %}
     {% set type = type|default('text') %}
-    {% if type != 'hidden' and ( widget_addon_prepend|default(null) is not null or widget_addon_append|default(null) is not null ) %}
+    {% if type != 'hidden' and ( widget_addon_prepend|default(null) is not null or widget_addon_append|default(null) is not null or widget_btn_prepend|default(null) is not null or widget_btn_append|default(null) is not null ) %}
     <div class="input-group">
+        {% if widget_btn_prepend|default(null) is not null %}
+            {% set widget_btns = widget_btn_prepend %}
+            {{ block('widget_btns') }}
+        {% endif %}
         {% if widget_addon_prepend|default(null) is not null %}
             {% set widget_addon = widget_addon_prepend %}
             {{ block('widget_addon') }}
@@ -89,10 +93,14 @@
     {% else %}
         {{ parent() }}
     {% endif %}
-    {% if type != 'hidden' and ( widget_addon_prepend|default(null) is not null or widget_addon_append|default(null) is not null ) %}
+    {% if type != 'hidden' and ( widget_addon_prepend|default(null) is not null or widget_addon_append|default(null) is not null or widget_btn_prepend|default(null) is not null or widget_btn_append|default(null) is not null ) %}
         {% if widget_addon_append|default(null) is not null %}
-        {% set widget_addon = widget_addon_append %}
-        {{ block('widget_addon') }}
+            {% set widget_addon = widget_addon_append %}
+            {{ block('widget_addon') }}
+        {% endif %}
+        {% if widget_btn_append|default(null) is not null %}
+            {% set widget_btns = widget_btn_append %}
+            {{ block('widget_btns') }}
         {% endif %}
     </div>
     {% endif %}
@@ -280,7 +288,10 @@
         <div data-provider="datepicker" class="input-group date" data-date="{{ value }}" data-link-field="{{ id }}" data-link-format="yyyy-mm-dd">
             <input {% if widget_form_control_class is not sameas(false) %}class="{{ widget_form_control_class }}" {% endif %}type="text" {% if read_only %} readonly="readonly"{% endif %}{% if disabled %} disabled="disabled"{% endif %}{% if required %} required="required"{% endif %}{% if 'placeholder' in attr|keys %} placeholder="{{ attr['placeholder'] }}"{% endif %}>
             <input type="hidden" value="{{ value }}" {{ block('widget_attributes') }}>
-            <span class="input-group-addon">{{ opwoco_bootstrap_icon(widget_addon_icon) }}</span>
+            {% if widget_reset_icon is defined and widget_reset_icon == true %}
+                <span class="input-group-addon">{{ mopa_bootstrap_icon('remove') }}</span>
+            {% endif %}
+            <span class="input-group-addon">{{ mopa_bootstrap_icon(widget_addon_icon) }}</span>
         </div>
     {% else %}
         {{ block('form_widget_simple') }}
@@ -306,7 +317,10 @@
         <div data-provider="timepicker" class="input-group date" data-date="{{ value }}" data-link-field="{{ id }}" data-link-format="hh:ii">
             <input class="form-control" type="text" {% if read_only %} readonly="readonly"{% endif %}{% if disabled %} disabled="disabled"{% endif %}{% if required %} required="required"{% endif %}{% if 'placeholder' in attr|keys %} placeholder="{{ attr['placeholder'] }}"{% endif %}>
             <input type="hidden" value="{{ value }}" {{ block('widget_attributes') }}>
-            <span class="input-group-addon">{{ opwoco_bootstrap_icon(widget_addon_icon) }}</span>
+            {% if widget_reset_icon is defined and widget_reset_icon == true %}
+                <span class="input-group-addon">{{ mopa_bootstrap_icon('remove') }}</span>
+            {% endif %}
+            <span class="input-group-addon">{{ mopa_bootstrap_icon(widget_addon_icon) }}</span>
         </div>
     {% else %}
         {{ block('form_widget_simple') }}
@@ -334,7 +348,10 @@
             <div data-provider="datetimepicker" class="input-group date" data-date="{% if value %}{{ value|date('Y-m-d H:i') }}{% endif %}" data-link-field="{{ id }}" data-link-format="yyyy-mm-dd hh:ii">
                 {{ block('form_widget_simple') }}
                 <input type="hidden" value="{% if value %}{{ value|date('Y-m-d H:i') }}{% endif %}" {{ block('widget_attributes') }}>
-                <span class="input-group-addon">{{ opwoco_bootstrap_icon(widget_addon_icon) }}</span>
+                {% if widget_reset_icon is defined and widget_reset_icon == true %}
+                    <span class="input-group-addon">{{ mopa_bootstrap_icon('remove') }}</span>
+                {% endif %}
+                <span class="input-group-addon">{{ mopa_bootstrap_icon(widget_addon_icon) }}</span>
             </div>
         {% else %}
             {{ block('form_widget_simple') }}
@@ -513,10 +530,12 @@
 {% spaceless %}
     {% if 'tab' in form.vars.block_prefixes %}
         {{ block('form_tab') }}
+    {% elseif embed_form is sameas(true) %}
+        {{ widget_prefix|trans({}, translation_domain)|raw }} {{ form_widget(form, _context) }} {{ widget_suffix|trans({}, translation_domain)|raw }}
     {% else %}
         {{ block('widget_form_group_start') }}
 
-        {% set show_horizontal_wrapper = horizontal and not (form.parent is not null and 'collection' in form.parent.vars.block_prefixes) %}
+        {% set show_horizontal_wrapper = horizontal and not (form.parent is not null and 'collection' in form.parent.vars.block_prefixes and form.parent.vars.horizontal_wrap_children is sameas(false)) %}
 
         {% if horizontal and not label_render %}
             {% set horizontal_input_wrapper_class = horizontal_input_wrapper_class ~ ' ' ~ horizontal_label_offset_class %}
@@ -551,9 +570,9 @@
 {% block form_message %}
 {% spaceless %}
     {{ form_errors(form) }}
-    {# certain cases require to have the help somewhere else in dom, is there any better place or way to handle this? #}
-    {% if not(widget_checkbox_label == 'label' and help_block) %}
-    {{ block('form_help') }}
+
+    {% if ('checkbox' not in block_prefixes or widget_checkbox_label != 'label') and help_block %}
+        {{ block('form_help') }}
     {% endif %}
 {% endspaceless %}
 {% endblock form_message %}
@@ -631,6 +650,20 @@
     <span class="input-group-addon">{{ (widget_addon.text|default(false) ? widget_addon.text|trans({}, translation_domain)|raw : opwoco_bootstrap_icon(widget_addon_icon, widget_addon_icon_inverted)) }}</span>
 {% endspaceless %}
 {% endblock widget_addon %}
+
+{% block widget_btns %}
+{% spaceless %}
+    <span class="input-group-btn">
+    {% for widget_btn in widget_btns %}
+        <button type="{{ widget_btn.type | default('button') }}" class="{{ 'btn ' ~ widget_btn.class | default('btn-default') }}">
+        {% if widget_btn.icon is not empty %}
+                {{ mopa_bootstrap_icon(widget_btn.icon, widget_btn.icon_inverted | default(false)) }}
+        {% endif %}
+        {{ widget_btn.label | default("") | trans({}, translation_domain) }}</button>
+    {% endfor %}
+    </span>
+{% endspaceless %}
+{% endblock widget_btns %}
 
 {# Errors #}
 

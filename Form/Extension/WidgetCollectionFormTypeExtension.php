@@ -9,11 +9,13 @@
 
 namespace opwoco\Bundle\BootstrapBundle\Form\Extension;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\Exception\InvalidArgumentException;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\Exception\InvalidArgumentException;
+use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Extension for Form collections.
@@ -42,7 +44,7 @@ class WidgetCollectionFormTypeExtension extends AbstractTypeExtension
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         if (in_array('collection', $view->vars['block_prefixes'])) {
-            if ($options['widget_add_btn'] != null && !is_array($options['widget_add_btn'])) {
+            if ($options['widget_add_btn'] !== null && !is_array($options['widget_add_btn'])) {
                 throw new InvalidArgumentException('The "widget_add_btn" option must be an "array".');
             }
 
@@ -55,7 +57,7 @@ class WidgetCollectionFormTypeExtension extends AbstractTypeExtension
         }
 
         if ($view->parent && in_array('collection', $view->parent->vars['block_prefixes'])) {
-            if ($options['widget_remove_btn'] != null && !is_array($options['widget_remove_btn'])) {
+            if ($options['widget_remove_btn'] !== null && !is_array($options['widget_remove_btn'])) {
                 throw new InvalidArgumentException('The "widget_remove_btn" option must be an "array".');
             }
 
@@ -71,19 +73,38 @@ class WidgetCollectionFormTypeExtension extends AbstractTypeExtension
         $view->vars['widget_add_btn'] = $options['widget_add_btn'];
         $view->vars['widget_remove_btn'] = $options['widget_remove_btn'];
         $view->vars['prototype_names'] = $options['prototype_names'];
+        $view->vars['horizontal_wrap_children'] = $options['horizontal_wrap_children'];
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @deprecated Remove it when bumping requirements to SF 2.7+
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $this->configureOptions($resolver);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'omit_collection_item' => true === $this->options['render_collection_item'] ? false : true,
             'widget_add_btn' => $this->options['widget_add_btn'],
             'widget_remove_btn' => $this->options['widget_remove_btn'],
             'prototype_names' => array(),
+            'horizontal_wrap_children' => false,
         ));
+        if (version_compare(Kernel::VERSION, '2.6', '<')) {
+            $resolver->setAllowedTypes(array(
+                'horizontal_wrap_children' => 'bool',
+            ));
+        } else {
+            $resolver->setAllowedTypes('horizontal_wrap_children', 'bool');
+        }
     }
 
     /**

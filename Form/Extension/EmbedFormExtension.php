@@ -1,32 +1,35 @@
 <?php
 
 /*
- * This file is part of the OpwocoBootstrapBundle.
+ * This file is part of the MopaBootstrapBundle.
+ *
+ * (c) Philipp A. Mohrenweiser <phiamo@googlemail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace opwoco\Bundle\BootstrapBundle\Form\Extension;
+namespace Mopa\Bundle\BootstrapBundle\Form\Extension;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Extension for Offsetting a button
+ * Extension for displaying 'inline' sub-forms.
  *
+ * @author peshi <peshis@gmail.com>
  */
-class OffsetButtonExtension extends AbstractTypeExtension
+class EmbedFormExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
      */
     public function getExtendedType()
     {
-        return 'button';
+        return 'form';
     }
 
     /**
@@ -44,16 +47,17 @@ class OffsetButtonExtension extends AbstractTypeExtension
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'button_offset' => null,
-        ));
+        $resolver->setDefaults(
+            array(
+                'embed_form' => null,
+            )
+        );
     }
-
     /**
      * {@inheritdoc}
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['button_offset'] = $options['button_offset'];
+        $view->vars['embed_form'] = $options['embed_form'];
     }
 }

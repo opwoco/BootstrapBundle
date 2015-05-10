@@ -17,7 +17,6 @@ use opwoco\Bundle\BootstrapBundle\Command\BootstrapSymlinkSassCommand;
 /**
  * Script for Composer, create symlink to bootstrap lib into the BootstrapBundle.
  *
- * @todo Maybe nice to convert this to a command and then reuse command in here?
  */
 class ScriptHandler
 {

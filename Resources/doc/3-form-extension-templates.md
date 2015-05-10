@@ -23,7 +23,7 @@ There are a bunch of other config variabled to control the templating behaviour 
 You can change them globally, on a per form basis and per field.
 
 ``` yaml
-opwoco_bootstrap:
+mopa_bootstrap:
     form:
         templating: false # default is true
         render_fieldset: true # default is true
@@ -32,7 +32,6 @@ opwoco_bootstrap:
         show_child_legend: false # default is false
         render_required_asterisk: true # default is false
         render_optional_text: false # default is true
-
         checkbox_label: 'both' # default is both (label|widget|both)
         error_type: 'block' # default is null
         collection:
@@ -51,13 +50,13 @@ opwoco_bootstrap:
 Or include the fields.html.twig in your template for a certain form:
 
 ``` jinja
-{% form_theme myform 'OpwocoBootstrapBundle:Form:fields.html.twig' %}
+{% form_theme myform 'MopaBootstrapBundle:Form:fields.html.twig' %}
 ```
 
 If you want the default bootstrap forms instead of horizontal add this to your config.yml
 
 ``` yaml
-opwoco_bootstrap:
+mopa_bootstrap:
     form:
         horizontal_label_class: ~
         horizontal_input_wrapper_class: ~
@@ -72,7 +71,7 @@ has now a attribute called show_legend which controls wether the "form legend" i
 This can be controlled globally by adapting your config.yml:
 
 ``` yaml
-opwoco_bootstrap:
+mopa_bootstrap:
     form:
         show_legend: false # default is true
 ```
@@ -98,7 +97,7 @@ This might make sense or not. I decided to disable this by default, but enabling
 To enable it globally use:
 
 ``` yaml
-opwoco_bootstrap:
+mopa_bootstrap:
     form:
         show_legend: false # default is true
 ```
@@ -177,7 +176,38 @@ public function buildForm(FormBuilder $builder, array $options)
     //...
 ```
 
-Note: To get the addons working, i had to increase max nesting level of xdebug to 200.
+Widget Button Addons
+-------------
+You can integrate Twitter Bootstrap's form button addons, you can add as many buttons as you need and add `icon` and / or
+`label`. The first button in append show the default values:
+
+```php
+public function buildForm(FormBuilder $builder, array $options)
+{
+    $builder
+        ->add('price', null, array(
+            "widget_btn_append" => array(
+                array(
+                    "type"          => "button",
+                    "label"         => "",
+                    "icon"          => null,
+                    "icon_inverted" => false,
+                ),
+                array(
+                    "icon"     => "remove",
+                )
+            ),
+            "widget_btn_prepend" => array(
+                array(
+                    "text"     => "My text",
+                )
+            )
+        ))
+    ;
+    //...
+```
+
+Note: To get the addons working, I had to increase max nesting level of xdebug to 200.
 
 
 ### Form Field Prefix / Suffix
@@ -206,7 +236,7 @@ Form Errors
 Generally you may want to define your errors to be displayed inline OR block (see bootstrap) you may define it globally in your conf:
 
 ``` yaml
-opwoco_bootstrap:
+mopa_bootstrap:
     form:
         error_type: block # or inline which is default
 
@@ -310,8 +340,8 @@ Collections
 
 Look into the more detailed doc:
 
-https://github.com/opwoco/BootstrapBundle/blob/master/Resources/doc/3.1-form-collections.md
+https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/3.1-form-collections.md
 
 ---
 
-<< [Using bootstrap in the layout](https://github.com/opwoco/BootstrapBundle/blob/master/Resources/doc/2-base-templates.md) | [Form Collections](https://github.com/opwoco/BootstrapBundle/blob/master/Resources/doc/3.1-form-collections.md) >>
+<< [Using bootstrap in the layout](https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/2-base-templates.md) | [Form Collections](https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/3.1-form-collections.md) >>
