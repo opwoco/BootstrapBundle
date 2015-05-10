@@ -13,6 +13,7 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Exception\InvalidArgumentException;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -97,9 +98,13 @@ class WidgetCollectionFormTypeExtension extends AbstractTypeExtension
             'prototype_names' => array(),
             'horizontal_wrap_children' => false,
         ));
-        $resolver->setAllowedTypes(array(
-            'horizontal_wrap_children' => 'bool',
-        ));
+        if (version_compare(Kernel::VERSION, '2.6', '<')) {
+            $resolver->setAllowedTypes(array(
+                'horizontal_wrap_children' => 'bool',
+            ));
+        } else {
+            $resolver->setAllowedTypes('horizontal_wrap_children', 'bool');
+        }
     }
 
     /**
