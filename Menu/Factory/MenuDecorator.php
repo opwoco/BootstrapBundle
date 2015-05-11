@@ -84,6 +84,12 @@ class MenuDecorator
         if ($options['icon']) {
             $item->setExtra('icon', $options['icon']);
         }
+        if ($options['icon-set']) {
+            $item->setExtra('icon_set', $options['icon-set']);
+        }
+        if ($options['scale']) {
+            $item->setExtra('scale', $options['scale']);
+        }
     }
 
     /**
@@ -106,6 +112,8 @@ class MenuDecorator
             'caret' => false,
             'pull-right' => false,
             'icon' => false,
+            'icon-set' => false,
+            'scale' => false,
             'divider' => false,
         ), $options);
     }
