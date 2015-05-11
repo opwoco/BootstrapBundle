@@ -149,7 +149,7 @@ EOT
                 if (strpos($identifier, $prefixIdentifier)) {
 
                     $isOnIgnoreList = false;
-                    foreach(InstallFontsCommand::$ignoredIdentifiers[$fontSet] as $ignored) {
+                    foreach(self::$ignoredIdentifiers[$fontSet] as $ignored) {
                         if (strpos($identifier, $ignored) != false) {
                             $isOnIgnoreList = true;
                         }
