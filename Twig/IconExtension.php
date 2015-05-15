@@ -85,14 +85,14 @@ class IconExtension extends \Twig_Extension
      *
      * @return Response
      */
-    public function renderIcon($icon, $iconSet = null, $scale = null, $inverted = false)
+    public function renderIcon($icon, $iconSet = null, $style = null, $inverted = false)
     {
         $template = $this->getIconTemplate();
 
         $context = array(
             'icon' => $icon,
             'inverted' => $inverted,
-            'scale' => $scale,
+            'style' => $style,
         );
         if (!$iconSet || !in_array($iconSet, $this->iconSets)) {
             $entity = $this->entityManager->getRepository('opwocoBootstrapBundle:BootstrapIcon')->findOneBy(array('identifier' => $icon));
