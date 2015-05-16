@@ -56,11 +56,7 @@ class opwocoBootstrapExtension extends Extension
          * Menu
          */
         if ($this->isConfigEnabled($container, $config['menu']) || $this->isConfigEnabled($container, $config['navbar'])) {
-            // @deprecated: remove this BC layer
-            if ($this->isConfigEnabled($container, $config['navbar'])) {
-                trigger_error(sprintf('opwoco_bootstrap.navbar is deprecated. Use opwoco_bootstrap.menu.'), E_USER_DEPRECATED);
-            }
-            $loader->load('menu.yml');
+            $loader->load('menu.xml');
             $this->remapParameters($container, 'opwoco_bootstrap.menu', $config['menu']);
         }
 

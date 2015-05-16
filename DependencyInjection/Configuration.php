@@ -25,7 +25,6 @@ class Configuration implements ConfigurationInterface
         $this->addFormConfig($rootNode);
         $this->addIconsConfig($rootNode);
         $this->addMenuConfig($rootNode);
-        $this->addInitializrConfig($rootNode);
         $this->addFlashConfig($rootNode);
 
         return $treeBuilder;

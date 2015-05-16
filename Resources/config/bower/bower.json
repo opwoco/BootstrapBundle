@@ -1,0 +1,6 @@
+{
+    "name": "opwoco-bootstrap",
+    "dependencies": {
+        "bootstrap": "~3.0"
+    }
+}
