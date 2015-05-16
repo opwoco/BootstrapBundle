@@ -56,8 +56,9 @@ class opwocoBootstrapExtension extends Extension
          * Menu
          */
         if ($this->isConfigEnabled($container, $config['menu']) || $this->isConfigEnabled($container, $config['navbar'])) {
-            $loader->load('menu.xml');
+            $loader->load('menu.yml');
             $this->remapParameters($container, 'opwoco_bootstrap.menu', $config['menu']);
+
         }
 
         /**
