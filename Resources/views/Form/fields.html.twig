@@ -289,9 +289,9 @@
             <input {% if widget_form_control_class is not sameas(false) %}class="{{ widget_form_control_class }}" {% endif %}type="text" {% if read_only %} readonly="readonly"{% endif %}{% if disabled %} disabled="disabled"{% endif %}{% if required %} required="required"{% endif %}{% if 'placeholder' in attr|keys %} placeholder="{{ attr['placeholder'] }}"{% endif %}>
             <input type="hidden" value="{{ value }}" {{ block('widget_attributes') }}>
             {% if widget_reset_icon is defined and widget_reset_icon == true %}
-                <span class="input-group-addon">{{ mopa_bootstrap_icon('remove') }}</span>
+                <span class="input-group-addon">{{ opwoco_bootstrap_icon('remove') }}</span>
             {% endif %}
-            <span class="input-group-addon">{{ mopa_bootstrap_icon(widget_addon_icon) }}</span>
+            <span class="input-group-addon">{{ opwoco_bootstrap_icon(widget_addon_icon) }}</span>
         </div>
     {% else %}
         {{ block('form_widget_simple') }}
@@ -318,9 +318,9 @@
             <input class="form-control" type="text" {% if read_only %} readonly="readonly"{% endif %}{% if disabled %} disabled="disabled"{% endif %}{% if required %} required="required"{% endif %}{% if 'placeholder' in attr|keys %} placeholder="{{ attr['placeholder'] }}"{% endif %}>
             <input type="hidden" value="{{ value }}" {{ block('widget_attributes') }}>
             {% if widget_reset_icon is defined and widget_reset_icon == true %}
-                <span class="input-group-addon">{{ mopa_bootstrap_icon('remove') }}</span>
+                <span class="input-group-addon">{{ opwoco_bootstrap_icon('remove') }}</span>
             {% endif %}
-            <span class="input-group-addon">{{ mopa_bootstrap_icon(widget_addon_icon) }}</span>
+            <span class="input-group-addon">{{ opwoco_bootstrap_icon(widget_addon_icon) }}</span>
         </div>
     {% else %}
         {{ block('form_widget_simple') }}
@@ -349,9 +349,9 @@
                 {{ block('form_widget_simple') }}
                 <input type="hidden" value="{% if value %}{{ value|date('Y-m-d H:i') }}{% endif %}" {{ block('widget_attributes') }}>
                 {% if widget_reset_icon is defined and widget_reset_icon == true %}
-                    <span class="input-group-addon">{{ mopa_bootstrap_icon('remove') }}</span>
+                    <span class="input-group-addon">{{ opwoco_bootstrap_icon('remove') }}</span>
                 {% endif %}
-                <span class="input-group-addon">{{ mopa_bootstrap_icon(widget_addon_icon) }}</span>
+                <span class="input-group-addon">{{ opwoco_bootstrap_icon(widget_addon_icon) }}</span>
             </div>
         {% else %}
             {{ block('form_widget_simple') }}
@@ -657,7 +657,7 @@
     {% for widget_btn in widget_btns %}
         <button type="{{ widget_btn.type | default('button') }}" class="{{ 'btn ' ~ widget_btn.class | default('btn-default') }}">
         {% if widget_btn.icon is not empty %}
-                {{ mopa_bootstrap_icon(widget_btn.icon, widget_btn.icon_inverted | default(false)) }}
+                {{ opwoco_bootstrap_icon(widget_btn.icon, widget_btn.icon_inverted | default(false)) }}
         {% endif %}
         {{ widget_btn.label | default("") | trans({}, translation_domain) }}</button>
     {% endfor %}
