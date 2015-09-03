@@ -63,7 +63,7 @@ class ErrorTypeFormTypeExtension extends AbstractTypeExtension
         $resolver->setDefaults(array(
             'error_type' => $this->errorType,
             'error_delay' => false,
-       ));
+        ));
     }
 
     /**

@@ -129,4 +129,4 @@ class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
 
 ---
 
-<< [Icons](https://github.com/opwoco/BootstrapBundle/blob/master/Resources/doc/6-icons.md)
+<< [Base initializr template](3.1-initializr-variables.md)

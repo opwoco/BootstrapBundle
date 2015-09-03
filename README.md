@@ -1,8 +1,5 @@
 OpwocoBootstrapBundle
-===================
 
-<<<<<<< HEAD
-This is a fork of the popular MopaBootstrapBundle.
 
 Branches
 --------
@@ -16,14 +13,26 @@ composer require opwoco/bootstrap-bundle:dev-master twbs/bootstrap:dev-master
 ```
 
 
-To use this bundle with bootstrap 3 use the latest stable release:
+Or config via composer.json
 
+For LESS:
 
 ``` json
 {
     "require": {
         "opwoco/bootstrap-bundle":    "~3.0.0",
-        "twbs/bootstrap":           "v3.2.0"
+        "twbs/bootstrap":           "v3.3.0"
+    }
+}
+```
+
+For SASS:
+
+``` json
+{
+    "require": {
+        "opwoco/bootstrap-bundle": "v3.0.0-rc1",
+        "twbs/bootstrap-sass": "~3.3.0"
     }
 }
 ```
@@ -46,11 +55,10 @@ To understand which versions are currently required have a look into `BRANCHES.m
 Documentation
 -------------
 
-The bulk of the documentation is stored in the `Resources/doc/index.md` file in this bundle
+The bulk of the documentation is stored in the [Resources/doc](Resources/doc) folder in this bundle
 In any case, if something is not working as expected after a update:
 
 * [READ the CHANGELOG!](https://github.com/phiamo/MopaBootstrapBundle/blob/master/CHANGELOG.md)
-
 
 Live Show
 ---------
@@ -69,24 +77,35 @@ Installation
 
 Installation instructions are located in the
 
-* [master documentation](https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/1-installation.md)
+* [master documentation](Resources/doc/install/1-getting-started.md)
 
 Included Features
 -----------------
 
-* Bootstrap Version detection via Composer Bridge
-* Twig Extensions and templates for use with Symfony2 Form component
+  * Bootstrap Version detection via Composer Bridge
+  * Twig Extensions and templates for use with Symfony2 Form component
   * control your form either via the form builder or the template engine
   * control nearly every bootstrap2 form feature
   * javascript and twig blocks for dynamic collections
-* Knp Menu Extension for dealing with bootstrap menus and navbars.
+  * Knp Menu Extension for dealing with bootstrap menus and navbars.
   * helpers for dropdowns, seperators, etc.
-* A tab type for forms to group data
-* twig templates for KnpPaginatorBundle (https://github.com/knplabs/KnpPaginatorBundle)
-* twig templates for CraueFormFlowBundle (https://github.com/craue/CraueFormFlowBundle)
-* twig template for KnpMenuBundle (https://github.com/KnpLabs/KnpMenuBundle)
+  * Twig Extension for multiple icon sets
+  * A generic Tab class to Manage bootstrap tabbing
+  * Twig templates for KnpPaginatorBundle (https://github.com/knplabs/KnpPaginatorBundle)
+  * Twig templates for CraueFormFlowBundle (https://github.com/craue/CraueFormFlowBundle)
+  * Twig template for KnpMenuBundle (https://github.com/KnpLabs/KnpMenuBundle)
   * icon support on menu links
-* Twig Extension for multiple icon sets
+
+Translations
+------------
+If you use [KnpPaginatorBundle](https://github.com/KnpLabs/KnpPaginatorBundle) with MopaBootstrapBundle, you can translate labels to your language.
+To do this add new file
+
+```sh
+Resources/translations/pagination.[YOUR LOCALE CODE].yml
+```
+
+As example you have there Polish translation.
 
 Contribute
 ----------

@@ -4,12 +4,12 @@ Installation
 Prerequisites
 -------------
 
-### Less (recommended)
+### LESS (recommended)
 
 Less is not required, but is extremely helpful when using bootstrap variables, or mixins,
 If you want to have a easier life, have a look into:
 
-[Less Documentation](https://github.com/opwoco/BootstrapBundle/blob/master/Resources/doc/less-installation.md)
+[Setup LESS Install](https://github.com/opwoco/BootstrapBundle/blob/master/Resources/doc/install/2-less-installation.md)
 
 ### Sass (recommended)
 
@@ -17,9 +17,7 @@ Sass is not required, but is extremely helpful when using bootstrap variables, o
 If you want to have a easier life, have a look into:
 
 [Sass Documentation](http://sass-lang.com/)
-
 [Compass Documentation](http://compass-style.org/)
-
 
 If you do not have less / Sass / Compass installed, currently you have several option, but please do NOT ask for help.
 
@@ -45,13 +43,8 @@ Installation
     ```json
     {
         "require": {
-<<<<<<< HEAD
             "opwoco/bootstrap-bundle": "dev-master",
             "twbs/bootstrap": "dev-master"
-=======
-            "opwoco/bootstrap-bundle":    "dev-master",
-            "twbs/bootstrap":           "dev-master"
->>>>>>> c6a228005309d9ed6d9b5f4d07665f30c5c33b33
         }
     }
     ```
@@ -61,13 +54,8 @@ Installation
     ```json
     {
         "require": {
-<<<<<<< HEAD
-            "opwoco/bootstrap-bundle": "dev-master",
-            "twbs/bootstrap": "dev-master",
-=======
-            "opwoco/bootstrap-bundle":        "dev-master",
+            "opwoco/bootstrap-bundle":      "dev-master",
             "twbs/bootstrap":               "dev-master",
->>>>>>> c6a228005309d9ed6d9b5f4d07665f30c5c33b33
             "knplabs/knp-paginator-bundle": "dev-master",
             "knplabs/knp-menu-bundle":      "dev-master",
             "knplabs/knp-menu":             "2.0.*@dev",
@@ -76,9 +64,9 @@ Installation
     }
     ```
 
-    1.4 Composer Scripts to Symlink Bootstrap Resources
+    1.4 BootstrapBundle, Twitter's Bootstrap and automatic symlinking
 
-    If you decided to let composer install twitters bootstrap, you might want to activate auto symlinking and checking, after composer update/install.
+    If you decided to let composer install Twitter's bootstrap, you might want to activate auto symlinking and checking, after composer update/install.
     So add this to your existing scripts section in your composer json:
     (recommended!)
 
@@ -133,13 +121,9 @@ Installation
     1.5. Include bootstrap manually or in another way:
 
     For including bootstrap there are different solutions, why using this one?
-<<<<<<< HEAD
-    have a look into [Including Bootstrap](https://github.com/opwoco/BootstrapBundle/blob/master/Resources/doc/including-bootstrap.md)
-    
-=======
-    have a look into [Including Bootstrap](https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/including-bootstrap.md)
+  
+    have a look into [Including Bootstrap](https://github.com/opwoco/BootstrapBundle/blob/master/Resources/doc/misc/including-bootstrap.md)
 
->>>>>>> c6a228005309d9ed6d9b5f4d07665f30c5c33b33
     1.6 Sass Installation
 
     If you want to use Sass, check out the Documentation on Sass. Basically you just need to add one package to composer.json:
@@ -147,19 +131,11 @@ Installation
     ```json
        {
            "require": {
-<<<<<<< HEAD
-               "opwoco/bootstrap-bundle": "dev-master",
-               "twbs/bootstrap-sass": "dev-master",
-               "knplabs/knp-paginator-bundle": "dev-master",
-               "knplabs/knp-menu-bundle": "dev-master",
-               "craue/formflow-bundle": "~2.0"
-=======
-               "opwoco/bootstrap-bundle":         "dev-master",
+               "opwoco/bootstrap-bundle":       "dev-master",
                "twbs/bootstrap-sass":           "dev-master",
                "knplabs/knp-paginator-bundle":  "dev-master",
                "knplabs/knp-menu-bundle":       "dev-master",
                "craue/formflow-bundle":         "dev-master"
->>>>>>> c6a228005309d9ed6d9b5f4d07665f30c5c33b33
            }
        }
     ```
@@ -173,7 +149,7 @@ Installation
     {
         return array(
             // ...
-            new opwoco\Bundle\BootstrapBundle\OpwocoBootstrapBundle(),
+            new opwoco\Bundle\BootstrapBundle\opwocoBootstrapBundle(),
             // ...
         );
     }
@@ -251,4 +227,4 @@ Installation
 
 ---
 
-[Using bootstrap in the layout](https://github.com/opwoco/BootstrapBundle/blob/master/Resources/doc/2-base-templates.md) >>
+[Using bootstrap in the layout](../usage/1-base-templates.md) >>

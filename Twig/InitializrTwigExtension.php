@@ -9,7 +9,6 @@
 
 namespace opwoco\Bundle\BootstrapBundle\Twig;
 
-
 /**
  * Reads Initializr configuration file and generates
  * corresponding Twig Globals.

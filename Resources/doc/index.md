@@ -3,42 +3,46 @@ Getting Started With OpwocoBootstrapBundle
 
 ## Installation
 
-1. [installation](1-installation.md)
+- [Getting Started](install/1-getting-started.md)
+- [LESS Installation](install/2-less-installation.md)
+- [SASS Configuration](install/3-sass-configuration.md)
+- [Assetic Configuration](install/4-assetic-configuration.md)
 
-## Bundle usage
+## Forms
 
-OpwocoBootstrapBundle provides several features to assist you quickly building applications:
+- [Form Extension Templates](form/1-form-extension-templates.md)
+- [Form Collections](form/2-form-collections.md)
+- [Form Tabs](form/3-form-tabs.md)
+- [Form Component](form/4-form-components.md)
 
-- [Base Templates](2-base-templates.md)
-- [Form Extension and Template](3-form-extension-templates.md)
-- [Generating Navbars](4-navbar-generation.md)
+## Usage
 
-Additional doc:
+- [Base Templates](usage/1-base-templates.md)
 
-- [Configuration Reference](configuration-reference.md)
-- [Including bootstrap](including-bootstrap.md)
-- [Changing Icon Framework](6-icons.md)
-- [Css vs less](css-vs-less.md)
-- [Using Sass as preprocessor](sass-configuration.md)
-- [Assetic configuration](assetic-configuration.md)
-- [Upgrading to new navbars](navbar-upgrade.md)
-- [Support for other Bundles](99-support-for-other-bundles.md)
-- [Testing Forms](testing-forms.md)
+## Extensions
 
-### Further documentation:
+- [Icons](extensions/1-icons.md)
+- [Navbars](extensions/2-navbars.md)
+- [Initialzr](extensions/3-initializr.md)
+  - [Initializr Variables](extensions/3.1-initializr-variables.md)
+- [Support for other bundles](extensions/4-support-for-other-bundles.md)
 
-There is a bunch of documentation for this bundle, have a look:
+## Other
 
-* in the [docs folder](https://github.com/opwoco/BootstrapBundle/blob/master/Resources/doc/)
-* in the various examples:
-    * [twig templates](https://github.com/phiamo/BootstrapSandboxBundle/tree/master/Resources/views/Examples)
+- [Configuration Reference](misc/configuration-reference.md)
+- [Including Bootstrap](misc/including-bootstrap.md)
+- [Testing Forms](misc/testing-forms.md)
+- [Windows Tips](misc/windows-tips.md)
+
+### Further Documentation and Examples
+
+* MopaBootsrapSandbox Examples
+    * [twig templates](https://github.com/phiamo/MopaBootstrapSandboxBundle/tree/master/Resources/views/Examples)
     * [Form Types](https://github.com/phiamo/MopaBootstrapSandboxBundle/tree/master/Form/Type)
     * [Navbar](https://github.com/phiamo/MopaBootstrapSandboxBundle/tree/master/Resources/config/examples)
     * [MenuBuilder](https://github.com/phiamo/MopaBootstrapSandboxBundle/tree/master/Navbar/Example)
-*  [MopaBootstrapSandboxBundle](http://github.com/phiamo/MopaBootstrapSandboxBundle) - Seperate live docs from code
 *  [symfony-bootstrap](https://github.com/phiamo/symfony-bootstrap) is also available
 
-### Example application(s)
 
 The following bundles/applications use the OpwocoBootstrapBundle and can be used as a
 guideline:

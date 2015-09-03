@@ -16,7 +16,9 @@ public function buildForm(FormBuilderInterface $builder, array $options)
         ))
         ->add('datetime', null, array(
             'widget' => 'single_text',
-            'datetimepicker' => true,
+            'datetimepicker' => array(
+                'attr' => array('data-start-view' => 'hour')
+            ),
         ))
         ->add('time', null, array(
             'widget' => 'single_text',
@@ -25,6 +27,7 @@ public function buildForm(FormBuilderInterface $builder, array $options)
     ;
 }
 ```
+As you can see for the datetimepicker example, you can pass additional options to the widget and customize it.
 
 If need to add 'reset' button to the field, add to field paremeters array:
 ```
@@ -113,6 +116,8 @@ assetic:
            - [Name of your bundle]
 ```
 
+Or you could simply add a file like in the sandbox: https://github.com/phiamo/MopaBootstrapSandboxBundle/blob/master/Resources/public/js/mopabootstrapsandbox-datepicker.js
+
 ---
 
-<< [Form Tabs](https://github.com/opwoco/BootstrapBundle/blob/master/Resources/doc/3.2-form-tabs.md) | [Generating a Navbar](https://github.com/opwoco/BootstrapBundle/blob/master/Resources/doc/4-navbar-generation.md) >>
+<< [Form Tabs](3-form-tabs.md) | [Using Icons](../extensions/1-icons.md) >>
