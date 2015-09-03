@@ -31,12 +31,17 @@
     "require-dev": {
         "phpunit/phpunit": "~4.6"
     },
+    "conflict": {
+        "symfony/twig-bridge": "<2.3"
+    },
     "suggest":  {
+
         "twbs/bootstrap": ">2.0,<4.0-dev",
         "knplabs/knp-paginator-bundle": "~2.3",
         "knplabs/knp-menu-bundle": "~2.0@dev",
         "craue/formflow-bundle": "~2.0",
-        "twbs/bootstrap-sass": "v3.1.1"
+        "twbs/bootstrap-sass": "v3.1.1",
+        "sp/bower-bundle": "0.11.*"
     },
     "scripts": {
         "post-install-cmd": [
@@ -45,5 +50,11 @@
         "post-update-cmd": [
             "opwoco\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
         ]
+
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.x-dev"
+        }
     }
 }

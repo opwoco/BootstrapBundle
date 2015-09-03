@@ -36,7 +36,7 @@ class IconExtension extends \Twig_Extension
     protected $iconSets;
 
     /**
-     * @var string
+     * @var \Twig_Template
      */
     protected $iconTemplate;
 
@@ -85,14 +85,14 @@ class IconExtension extends \Twig_Extension
      *
      * @return Response
      */
-    public function renderIcon($icon, $iconSet = null, $scale = null, $inverted = false)
+    public function renderIcon($icon, $iconSet = null, $iconStyle = null, $inverted = false)
     {
         $template = $this->getIconTemplate();
 
         $context = array(
             'icon' => $icon,
             'inverted' => $inverted,
-            'scale' => $scale,
+            'icon_style' => $iconStyle,
         );
         if (!$iconSet || !in_array($iconSet, $this->iconSets)) {
             $entity = $this->entityManager->getRepository('opwocoBootstrapBundle:BootstrapIcon')->findOneBy(array('identifier' => $icon));
@@ -130,7 +130,7 @@ class IconExtension extends \Twig_Extension
     }
 
     /**
-     * @return \Twig_TemplateInterface
+     * @return \Twig_Template
      */
     protected function getIconTemplate()
     {

@@ -8,8 +8,8 @@
 
 {% block head %}
 <head>
-    <meta charset="{{ _charset }}" />
     {% block head_style %}
+    <meta charset="{{ _charset }}" />
     {# Override this block to add your own files! #}
     {# To use this without less or sass use the base.html.twig template as your base
      # Be sure you understand whats going on: have a look into
@@ -112,6 +112,7 @@
     Otherwise the regeneration is done on every load in dev more with use_controller: true
      #}
     {% block foot_script_assetic %}
+        {# Please add the javascripts you need in your project #}
     {% endblock foot_script_assetic %}
 
     <script type="text/javascript">

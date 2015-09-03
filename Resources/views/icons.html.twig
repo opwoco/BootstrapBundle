@@ -1,20 +1,20 @@
-{# valid values for scale are: 'lg' , '2x' , '3x' , '4x' , '5x' #}
+{# valid values for style are: 'lg' , '2x' , '3x' , '4x' , '5x' #}
 {% block fa -%}
-<i class="fa fa-{{ icon }}{{ inverted ? ' fa-inverse' : '' }}{{ scale ? ' scale-' ~  scale : '' }}"></i>
+<i class="fa fa-{{ icon }}{{ inverted ? ' fa-inverse' : '' }}{{ icon_style ? ' icon-' ~  icon_style : '' }}"></i>
 {%- endblock %}
 
 {% block glyphicon -%}
-<span class="glyphicon glyphicon-{{ icon }}{{ scale ? ' scale-' ~  scale : '' }}{{ inverted ? ' color-inverse' : '' }}"></span>
+<span class="glyphicon glyphicon-{{ icon }}{{ icon_style ? ' icon-' ~  icon_style : '' }}{{ inverted ? ' color-inverse' : '' }}"></span>
 {%- endblock %}
 
 {% block ion -%}
-    <i class="icon ion-{{ icon }}{{ scale ? ' scale-' ~  scale : '' }}{{ inverted ? ' color-inverse' : '' }}"></i>
+    <i class="ionicons ion-{{ icon }}{{ icon_style ? ' icon-' ~  icon_style : '' }}{{ inverted ? ' color-inverse' : '' }}"></i>
 {%- endblock %}
 
 {% block octicon -%}
-    <span class="octicon octicon-{{ icon }}{{ scale ? ' scale-' ~  scale : '' }}{{ inverted ? ' color-inverse' : '' }}"></span>
+    <span class="octicon octicon-{{ icon }}{{ icon_style ? ' icon-' ~  icon_style : '' }}{{ inverted ? ' color-inverse' : '' }}"></span>
 {%- endblock %}
 
-{% block foundation -%}
-    <span class="fi-{{ icon }}{{ scale ? ' scale-' ~  scale : '' }}{{ inverted ? ' color-inverse' : '' }}"></span>
+{% block fi -%}
+    <span class="fi-{{ icon }}{{ icon_style ? ' icon-' ~  icon_style     : '' }}{{ inverted ? ' color-inverse' : '' }}"></span>
 {%- endblock %}

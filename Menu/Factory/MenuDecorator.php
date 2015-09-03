@@ -56,7 +56,7 @@ class MenuDecorator
         if ($options['dropdown']) {
             $item
                 ->setUri('#')
-                ->setAttribute('class', 'dropdown')
+                ->setAttribute('class', trim('dropdown '.$item->getAttribute('class')))
                 ->setLinkAttribute('class', 'dropdown-toggle')
                 ->setLinkAttribute('data-toggle', 'dropdown')
                 ->setChildrenAttribute('class', 'dropdown-menu')
@@ -84,6 +84,12 @@ class MenuDecorator
         if ($options['icon']) {
             $item->setExtra('icon', $options['icon']);
         }
+        if ($options['icon-set']) {
+            $item->setExtra('icon_set', $options['icon-set']);
+        }
+        if ($options['icon-style']) {
+            $item->setExtra('icon_style', $options['icon-style']);
+        }
     }
 
     /**
@@ -106,6 +112,9 @@ class MenuDecorator
             'caret' => false,
             'pull-right' => false,
             'icon' => false,
+            'icon-style' => false,
+            'icon-set' => false,
+            'scale' => false,
             'divider' => false,
         ), $options);
     }

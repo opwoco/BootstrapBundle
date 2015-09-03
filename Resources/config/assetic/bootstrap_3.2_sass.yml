@@ -1,0 +1,15 @@
+assetic:
+    assets:
+        bootstrap_css:
+            inputs:
+                - "@opwocoBootstrapBundle/Resources/public/sass/bootstrap_and_overrides.scss"
+                - "@opwocoBootstrapBundle/Resources/public/bootstrap-sass/assets/stylesheets/_bootstrap.scss"
+                - "@opwocoBootstrapBundle/Resources/public/sass/paginator.scss"
+                - "@opwocoBootstrapBundle/Resources/public/sass/collections.scss"
+                - "@opwocoBootstrapBundle/Resources/public/sass/form_flow.scss"
+        bootstrap_js:
+            inputs:
+                - "@opwocoBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"
+                - "@opwocoBootstrapBundle/Resources/public/bootstrap-sass/assets/javascripts/bootstrap/*.js"
+                - "@opwocoBootstrapBundle/Resources/public/js/mopabootstrap-collection.js"
+                - "@opwocoBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js"

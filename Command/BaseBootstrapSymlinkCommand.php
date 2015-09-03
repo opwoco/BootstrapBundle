@@ -27,6 +27,14 @@ abstract class BaseBootstrapSymlinkCommand extends ContainerAwareCommand
     public static $opwocoBootstrapBundleName = "opwoco/bootstrap-bundle";
     public static $targetSuffix = '';
     public static $pathName = 'TwitterBootstrap';
+    /**
+     * @var InputInterface
+     */
+    protected $input;
+    /**
+     * @var OutputInterface
+     */
+    protected $output;
 
     /**
      * Checks symlink's existence.
@@ -90,10 +98,16 @@ abstract class BaseBootstrapSymlinkCommand extends ContainerAwareCommand
      */
     public static function createMirror($symlinkTarget, $symlinkName)
     {
+        if (strlen($symlinkTarget) == 0 || empty($symlinkTarget)) {
+            throw new \Exception("symlinkTarget empty!".var_export($symlinkTarget, true));
+        }
+        if (strlen($symlinkName) == 0 || empty($symlinkName)) {
+            throw new \Exception("symlinkName empty!".var_export($symlinkName, true));
+        }
         $filesystem = new Filesystem();
         $filesystem->mkdir($symlinkName);
         $filesystem->mirror(
-            realpath($symlinkName.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.$symlinkTarget),
+            $symlinkName.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.$symlinkTarget,
             $symlinkName,
             null,
             array('copy_on_windows' => true, 'delete' => true, 'override' => true)
@@ -138,8 +152,8 @@ abstract class BaseBootstrapSymlinkCommand extends ContainerAwareCommand
             $targetPath = $this->getContainer()->getParameter("opwoco_bootstrap.bootstrap.install_path");
             $cmanager = new ComposerPathFinder($composer);
             $options = array(
-                    'targetSuffix' => DIRECTORY_SEPARATOR.$targetPath.static::$targetSuffix,
-                    'sourcePrefix' => '..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR,
+                'targetSuffix' => DIRECTORY_SEPARATOR.$targetPath.static::$targetSuffix,
+                'sourcePrefix' => '..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR,
             );
             list($symlinkTarget, $symlinkName) = $cmanager->getSymlinkFromComposer(
                 self::$opwocoBootstrapBundleName,
@@ -160,8 +174,8 @@ abstract class BaseBootstrapSymlinkCommand extends ContainerAwareCommand
                 $this->output->writeln(" ... <comment>symlink already exists</comment>");
             } else {
                 $this->output->writeln(" ... <comment>not existing</comment>");
-                $this->output->writeln("Mirroring from: ".$symlinkName);
-                $this->output->write("for target: ".$symlinkTarget);
+                $this->output->writeln(sprintf("Mirroring to: %s", $symlinkName));
+                $this->output->write(sprintf("from target: %s", realpath($symlinkName.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.$symlinkTarget)));
                 self::createMirror($symlinkTarget, $symlinkName);
             }
         } else {
@@ -200,8 +214,7 @@ abstract class BaseBootstrapSymlinkCommand extends ContainerAwareCommand
                 throw new \Exception("Target path ".$symlinkTarget."is not a directory!");
             }
         } else {
-            $resolve = $symlinkName.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.$symlinkTarget;
-            $symlinkTarget = self::getAbsolutePath($resolve);
+            $symlinkTarget = $symlinkName.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.$symlinkTarget;
         }
 
         if (!is_dir($symlinkTarget)) {
@@ -213,7 +226,7 @@ abstract class BaseBootstrapSymlinkCommand extends ContainerAwareCommand
 Creating the symlink: $symlinkName
 Pointing to: $symlinkTarget
 EOF
-;
+        ;
         $this->output->writeln(array(
             '',
             $this->getHelperSet()->get('formatter')->formatBlock($text, 'bg=blue;fg=white', true),
@@ -225,31 +238,5 @@ EOF
         }
 
         return array($symlinkTarget, $symlinkName);
-    }
-
-    /**
-     * @param string $path
-     *
-     * @return string
-     */
-    protected static function getAbsolutePath($path)
-    {
-        $path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
-        $parts = array_filter(explode(DIRECTORY_SEPARATOR, $path), 'strlen');
-        $absolutes = array();
-
-        foreach ($parts as $part) {
-            if ('.' == $part) {
-                continue;
-            }
-
-            if ('..' == $part) {
-                array_pop($absolutes);
-            } else {
-                $absolutes[] = $part;
-            }
-        }
-
-        return implode(DIRECTORY_SEPARATOR, $absolutes);
     }
 }

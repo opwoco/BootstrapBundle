@@ -96,4 +96,4 @@ Please note that you must not use the `@opwocoBootstrap/Resources/public/less/op
 
 ---
 
-<< [Base initializr template](https://github.com/opwoco/BootstrapBundle/blob/master/Resources/doc/51-initializr-variables.md) | [Support for other Bundles](https://github.com/opwoco/BootstrapBundle/blob/master/Resources/doc/99-support-for-other-bundles.md) >>
+<< [Form Components](../form/4-form-components.md) | [Navbar Generation](2-navbars.md) >>
