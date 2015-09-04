@@ -48,10 +48,6 @@ class HelpFormTypeExtension extends AbstractTypeExtension
             throw new InvalidArgumentException('The "help_label_tooltip" option must be an "array".');
         }
 
-        if ($options['help_block_horizontal_wrapper_class']) {
-            $options['help_block_horizontal_wrapper_class'] = $this->options['help_block_horizontal_wrapper_class'];
-        }
-
         if ($options['help_label_tooltip']) {
             if (!isset($options['help_label_tooltip']['title'])) {
                 $options['help_label_tooltip']['title'] = $this->options['help_label_tooltip']['title'];
@@ -155,7 +151,6 @@ class HelpFormTypeExtension extends AbstractTypeExtension
             }
         }
 
-        $view->vars['help_block_horizontal_wrapper_class'] = $options['help_block_horizontal_wrapper_class'];
         $view->vars['help_label_tooltip'] = $options['help_label_tooltip'];
         $view->vars['help_label_popover'] = $options['help_label_popover'];
         $view->vars['help_block_tooltip'] = $options['help_block_tooltip'];
@@ -181,7 +176,6 @@ class HelpFormTypeExtension extends AbstractTypeExtension
         $resolver->setDefaults(array(
             'help_block' => null,
             'help_label' => null,
-            'help_block_horizontal_wrapper_class' => $this->options['help_block_horizontal_wrapper_class'],
             'help_label_tooltip' => $this->options['help_label_tooltip'],
             'help_label_popover' => $this->options['help_label_popover'],
             'help_block_tooltip' => $this->options['help_block_tooltip'],
