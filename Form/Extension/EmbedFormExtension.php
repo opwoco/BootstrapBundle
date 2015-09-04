@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Mopa\Bundle\BootstrapBundle\Form\Extension;
+namespace opwoco\Bundle\BootstrapBundle\Form\Extension;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
