@@ -343,14 +343,17 @@
                 {{ block('form_widget_simple') }}
                 <span class="input-group-addon">{{ opwoco_bootstrap_icon(widget_addon_icon) }}</span>
             </div>
+        {% else %}
+            {{ block('form_widget_simple') }}
+        {% endif %}
     {% else %}
-        {% set attr = attr|merge({'class': attr.class|default('')}) %}
-        <div {{ block('widget_container_attributes') }}>
-            {{ form_errors(form.date) }}
-            {{ form_errors(form.time) }}
-            {{ form_widget(form.date, {'attr': {'class': attr.widget_class|default('')}, 'horizontal_input_wrapper_class': horizontal_input_wrapper_class|default('col-sm-3')}) }}
-            {{ form_widget(form.time, {'attr': {'class': attr.widget_class|default('')}, 'horizontal_input_wrapper_class': horizontal_input_wrapper_class|default('col-sm-2')}) }}
-        </div>
+            {% set attr = attr|merge({'class': attr.class|default('')}) %}
+            <div {{ block('widget_container_attributes') }}>
+                {{ form_errors(form.date) }}
+                {{ form_errors(form.time) }}
+                {{ form_widget(form.date, {'attr': {'class': attr.widget_class|default('')}, 'horizontal_input_wrapper_class': horizontal_input_wrapper_class|default('col-sm-3')}) }}
+                {{ form_widget(form.time, {'attr': {'class': attr.widget_class|default('')}, 'horizontal_input_wrapper_class': horizontal_input_wrapper_class|default('col-sm-2')}) }}
+            </div>
     {% endif %}
 {% endspaceless %}
 {% endblock datetime_widget %}
