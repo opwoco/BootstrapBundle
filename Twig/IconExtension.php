@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * OpwocoBootstrap Icon Extension.
  *
- * @author Craig Blanchette (isometriks) <craig.blanchette@gmail.com>
  */
 class IconExtension extends \Twig_Extension
 {
