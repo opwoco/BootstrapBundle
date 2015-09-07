@@ -9,7 +9,14 @@
 {% block button_widget %}
     {% spaceless %}
         {% if label is empty %}
-            {% set label = name|humanize %}
+            {%- if label_format is defined and label_format is not empty -%}
+                {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+                }) %}
+            {%- else -%}
+                {% set label = name|humanize %}
+            {%- endif -%}
         {% endif %}
         <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
             {% if icon is not empty %}
@@ -29,10 +36,10 @@
                 </div>
             </div>
         {% else %}
-    <div>
-        {{ form_widget(form) }}
-    </div>
-{% endif %}
+            <div>
+                {{ form_widget(form) }}
+            </div>
+        {% endif %}
     {% endspaceless %}
 {% endblock button_row %}
 
@@ -66,8 +73,12 @@
 {% block form_widget_simple %}
     {% spaceless %}
         {% set type = type|default('text') %}
-        {% if type != 'hidden' and ( widget_addon_prepend|default(null) is not null or widget_addon_append|default(null) is not null ) %}
+        {% if type != 'hidden' and ( widget_addon_prepend|default(null) is not null or widget_addon_append|default(null) is not null or widget_btn_prepend|default(null) is not null or widget_btn_append|default(null) is not null ) %}
             <div class="input-group">
+            {% if widget_btn_prepend|default(null) is not null %}
+                {% set widget_btns = widget_btn_prepend %}
+                {{ block('widget_btns') }}
+            {% endif %}
             {% if widget_addon_prepend|default(null) is not null %}
                 {% set widget_addon = widget_addon_prepend %}
                 {{ block('widget_addon') }}
@@ -82,10 +93,14 @@
         {% else %}
             {{ parent() }}
         {% endif %}
-        {% if type != 'hidden' and ( widget_addon_prepend|default(null) is not null or widget_addon_append|default(null) is not null ) %}
+        {% if type != 'hidden' and ( widget_addon_prepend|default(null) is not null or widget_addon_append|default(null) is not null or widget_btn_prepend|default(null) is not null or widget_btn_append|default(null) is not null ) %}
             {% if widget_addon_append|default(null) is not null %}
                 {% set widget_addon = widget_addon_append %}
                 {{ block('widget_addon') }}
+            {% endif %}
+            {% if widget_btn_append|default(null) is not null %}
+                {% set widget_btns = widget_btn_append %}
+                {{ block('widget_btns') }}
             {% endif %}
             </div>
         {% endif %}
@@ -150,29 +165,29 @@
 {% block collection_widget %}
 {% spaceless %}
     {% if prototype is defined %}
-    {% set prototype_markup = form_row(prototype) %}
-    {% set data_prototype_name = form.vars.form.vars.prototype.vars.name|default('__name__') %}
-    {% set data_prototype_label = form.vars.form.vars.prototype.vars.label|default('__name__label__') %}
-    {% set widget_form_group_attr = widget_form_group_attr|merge({
-    'data-prototype': prototype_markup,
-    'data-prototype-name': data_prototype_name,
-    'data-prototype-label': data_prototype_label
-    })|merge(attr) %}
-{% endif %}
+        {% set prototype_markup = form_row(prototype) %}
+        {% set data_prototype_name = form.vars.form.vars.prototype.vars.name|default('__name__') %}
+        {% set data_prototype_label = form.vars.form.vars.prototype.vars.label|default('__name__label__') %}
+        {% set widget_form_group_attr = widget_form_group_attr|merge({
+            'data-prototype': prototype_markup,
+            'data-prototype-name': data_prototype_name,
+            'data-prototype-label': data_prototype_label
+        })|merge(attr) %}
+    {% endif %}
     {# Add row by default use attr.class to change#}
 	{% if 'collection' in form.vars.block_prefixes and attr.class is defined %}
-    {% set widget_form_group_attr = widget_form_group_attr|merge({'class': widget_form_group_attr.class|default('row') ~ ' ' ~ attr.class}) %}
-{% endif %}
+		{% set widget_form_group_attr = widget_form_group_attr|merge({'class': widget_form_group_attr.class|default('row') ~ ' ' ~ attr.class}) %}
+	{% endif %}
     {# collection item adds class {form_id}_form-group  too #}
     {% set widget_form_group_attr = widget_form_group_attr|merge({'id': 'collection' ~ id ~ '_form_group', 'class': widget_form_group_attr.class ~ ' collection-items ' ~ id ~ '_form_group'}) %}
 
     <div {% for attrname,attrvalue in widget_form_group_attr %} {{attrname}}="{{attrvalue}}"{% endfor %}>
     {# Add initial prototype form #}
     {% if form.vars.value|length == 0 and prototype is defined %}
-    {% for name in prototype_names %}
-        {{ prototype_markup|replace({'__name__': name})|raw }}
-    {% endfor %}
-{% endif %}
+        {% for name in prototype_names %}
+            {{ prototype_markup|replace({'__name__': name})|raw }}
+        {% endfor %}
+    {% endif %}
     {{ block('form_widget') }}
     </div>
 {% endspaceless %}
@@ -223,7 +238,14 @@
 {% block checkbox_widget %}
     {% spaceless %}
         {% if label is not sameas(false) and label is empty %}
-            {% set label = name|humanize %}
+            {%- if label_format is defined and label_format is not empty -%}
+                {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+                }) %}
+            {%- else -%}
+                {% set label = name|humanize %}
+            {%- endif -%}
         {% endif %}
         {% if form.parent != null and 'choice' not in form.parent.vars.block_prefixes %}
             <div
@@ -245,10 +267,10 @@
         {% if form.parent != null and 'choice' not in form.parent.vars.block_prefixes %}
             {% if label_render %}
                 {% if widget_checkbox_label in ['both', 'widget'] %}
-            {{ label|trans({}, translation_domain)|raw }}
-        {% else %}
-            {{ block('form_help') }}
-        {% endif %}
+                    {{ label|trans({}, translation_domain)|raw }}
+                {% else %}
+                    {{ block('form_help') }}
+                {% endif %}
                 </label>
             {% endif %}
         {% endif %}
@@ -269,7 +291,7 @@
                 <span class="input-group-addon">{{ opwoco_bootstrap_icon('remove') }}</span>
             {% endif %}
             {# Clear the id & name attributes so that they don't override the hidden fields values #}
-            {% set id = id ~ '_mopa_picker_display' %}
+            {% set id = id ~ '_opwoco_picker_display' %}
             {% set full_name = null %}
             {% set type = 'text' %}
             {{ block('form_widget_simple') }}
@@ -302,7 +324,7 @@
                 <span class="input-group-addon">{{ opwoco_bootstrap_icon('remove') }}</span>
             {% endif %}
             {# Clear the id & name attributes so that they don't override the hidden fields values #}
-            {% set id = id ~ '_mopa_picker_display' %}
+            {% set id = id ~ '_opwoco_picker_display' %}
             {% set full_name = null %}
             {% set type = 'text' %}
             {{ block('form_widget_simple') }}
@@ -313,17 +335,17 @@
     {% endif %}
 {% else %}
     {% set attr = attr|merge({'class': attr.class|default('')}) %}
-        {% spaceless %}
-            {{ form_widget(form.hour, { 'horizontal_input_wrapper_class': horizontal_input_wrapper_class|default('col-sm-2')}) }}
-            {% if with_minutes %}
-                {{ form_widget(form.minute, { 'horizontal_input_wrapper_class': horizontal_input_wrapper_class|default('col-sm-2')}) }}
-            {% endif %}
-            {% if with_seconds %}
-                :{{ form_widget(form.second, { 'horizontal_input_wrapper_class': horizontal_input_wrapper_class|default('col-sm-2') }) }}
-            {% endif %}
-        {% endspaceless %}
+    {% spaceless %}
+    {{ form_widget(form.hour, { 'horizontal_input_wrapper_class': horizontal_input_wrapper_class|default('col-sm-2')}) }}
+    {% if with_minutes %}
+        {{ form_widget(form.minute, { 'horizontal_input_wrapper_class': horizontal_input_wrapper_class|default('col-sm-2')}) }}
+    {% endif %}
+    {% if with_seconds %}
+        :{{ form_widget(form.second, { 'horizontal_input_wrapper_class': horizontal_input_wrapper_class|default('col-sm-2') }) }}
     {% endif %}
     {% endspaceless %}
+{% endif %}
+{% endspaceless %}
 {% endblock time_widget %}
 
 {% block datetime_widget %}
@@ -337,7 +359,7 @@
                     <span class="input-group-addon">{{ opwoco_bootstrap_icon('remove') }}</span>
                 {% endif %}
                 {# Clear the id & name attributes so that they don't override the hidden fields values #}
-                {% set id = id ~ '_mopa_picker_display' %}
+                {% set id = id ~ '_opwoco_picker_display' %}
                 {% set full_name = null %}
                 {% set type = 'text' %}
                 {{ block('form_widget_simple') }}
@@ -394,8 +416,15 @@
 {% block form_legend %}
 {% spaceless %}
     {% if label is empty %}
-    {% set label = name|humanize %}
-{% endif %}
+        {%- if label_format is defined and label_format is not empty -%}
+            {% set label = label_format|replace({
+            '%name%': name,
+            '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {% endif %}
     <{{ legend_tag }}>{{ label|trans({}, translation_domain) }}</{{ legend_tag }}>
 {% endspaceless %}
 {% endblock form_legend %}
@@ -405,31 +434,38 @@
 {% spaceless %}
     {% if label is not sameas(false) %}
         {% if label is empty %}
-    {% set label = name|humanize %}
-{% endif %}
+            {%- if label_format is defined and label_format is not empty -%}
+                {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+                }) %}
+            {%- else -%}
+                {% set label = name|humanize %}
+            {%- endif -%}
+        {% endif %}
         {% if not compound %}
-    {% set label_attr = label_attr|merge({'for': id}) %}
-{% endif %}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {% endif %}
         {% set label_attr_class = '' %}
         {% if horizontal %}
-    {% set label_attr_class = 'control-label ' ~ label_attr_class ~ horizontal_label_class %}
-{% endif %}
+            {% set label_attr_class = 'control-label ' ~ label_attr_class ~ horizontal_label_class %}
+        {% endif %}
         {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ " " ~ label_attr_class ~ (required ? ' required' : ' optional'))|trim }) %}
         <label{% for attrname,attrvalue in label_attr %} {{attrname}}="{{attrvalue}}"{% endfor %}>
         {{ label|trans({}, translation_domain) }}
         {{- block('label_asterisk') }}
         {% if 'collection' in form.vars.block_prefixes and widget_add_btn|default(null) and form.vars.allow_add == true %}
-    &nbsp;{{ block('form_widget_add_btn') }}
-{% endif %}
+            &nbsp;{{ block('form_widget_add_btn') }}
+        {% endif %}
         {% if help_label %}
-    {{ block('help_label') }}
-{% endif %}
+            {{ block('help_label') }}
+        {% endif %}
         {% if help_label_tooltip.title %}
-    {{ block('help_label_tooltip') }}
-{% endif %}
+            {{ block('help_label_tooltip') }}
+        {% endif %}
         {% if help_label_popover.title %}
-    {{ block('help_label_popover') }}
-{% endif %}
+            {{ block('help_label_popover') }}
+        {% endif %}
         </label>
     {% endif %}
 {% endspaceless %}
@@ -442,7 +478,8 @@
 
 {% block help_label_tooltip %}
     <span class="help-block">
-        <a href="#" data-toggle="tooltip" data-placement="{{ help_label_tooltip.placement}}" data-title="{{ help_label_tooltip.title|trans({}, translation_domain) }}">
+        <a href="#" data-toggle="tooltip" data-placement="{{ help_label_tooltip.placement }}"
+           data-title="{{ help_label_tooltip.title|trans({}, translation_domain) }}">
             {% if help_label_tooltip.icon is not sameas(false) %}
                 {{ opwoco_bootstrap_icon(help_label_tooltip.icon) }}
             {% endif %}
@@ -460,7 +497,9 @@
 
 {% block help_label_popover %}
     <span class="help-block">
-        <a href="#" data-toggle="popover" data-trigger="hover" data-placement="{{ help_label_popover.placement}}" data-title="{{ help_label_popover.title|trans({}, translation_domain) }}" data-content="{{ help_label_popover.content|trans({}, translation_domain) }}" data-html="true">
+        <a href="#" data-toggle="popover" data-trigger="hover" data-placement="{{ help_label_popover.placement }}"
+           data-title="{{ help_label_popover.title|trans({}, translation_domain) }}"
+           data-content="{{ help_label_popover.content|trans({}, translation_domain) }}" data-html="true">
             {% if help_label_popover.icon is not sameas(false) %}
                 {{ opwoco_bootstrap_icon(help_label_popover.icon) }}
             {% endif %}
@@ -479,37 +518,39 @@
 {% block form_actions_widget %}
     {% for button in form.children %}
         {{ form_widget(button) }}&nbsp; {# this needs to be here due to https://github.com/twbs/bootstrap/issues/3245 #}
-    {% endfor  %}
+    {% endfor %}
 {% endblock %}
 
 {# Rows #}
 {% block form_actions_row %}
-    {{ block('button_row')  }}
+    {{ block('button_row') }}
 {% endblock %}
 
 {% block form_rows_visible %}
-{% spaceless %}
-     {% if errors|length > 0 %}
-        <div class="symfony-form-errors">
-            {{ form_errors(form) }}
-        </div>
-    {% endif %}
-    {% for child in form %}
-        {% if 'hidden' not in child.vars.block_prefixes %} {# smbdy: why do we not add the hiddens of childs? 131024 phiamo: i think form rest should do this !? it was afaik removed because it cause side effekts #}
-            {{ form_row(child) }}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            <div class="symfony-form-errors">
+                {{ form_errors(form) }}
+            </div>
         {% endif %}
-    {% endfor %}
-{% endspaceless %}
+        {% for child in form %}
+            {% if 'hidden' not in child.vars.block_prefixes %} {# smbdy: why do we not add the hiddens of childs? 131024 phiamo: i think form rest should do this !? it was afaik removed because it cause side effekts #}
+                {{ form_row(child) }}
+            {% endif %}
+        {% endfor %}
+    {% endspaceless %}
 {% endblock form_rows_visible %}
 
 {% block form_row %}
     {% spaceless %}
         {% if 'tab' in form.vars.block_prefixes %}
             {{ block('form_tab') }}
+        {% elseif embed_form is sameas(true) %}
+            {{ widget_prefix|trans({}, translation_domain)|raw }} {{ form_widget(form, _context) }} {{ widget_suffix|trans({}, translation_domain)|raw }}
         {% else %}
             {{ block('widget_form_group_start') }}
 
-            {% set show_horizontal_wrapper = horizontal and not (form.parent is not null and 'collection' in form.parent.vars.block_prefixes) %}
+            {% set show_horizontal_wrapper = horizontal and not (form.parent is not null and 'collection' in form.parent.vars.block_prefixes and form.parent.vars.horizontal_wrap_children is sameas(false)) %}
 
             {% if horizontal and not label_render %}
                 {% set horizontal_input_wrapper_class = horizontal_input_wrapper_class ~ ' ' ~ horizontal_label_offset_class %}
@@ -543,8 +584,8 @@
 {% block form_message %}
     {% spaceless %}
         {{ form_errors(form) }}
-        {# certain cases require to have the help somewhere else in dom, is there any better place or way to handle this? #}
-        {% if not(widget_checkbox_label == 'label' and help_block) %}
+
+        {% if ('checkbox' not in block_prefixes or widget_checkbox_label != 'label') and help_block %}
             {{ block('form_help') }}
         {% endif %}
     {% endspaceless %}
@@ -554,7 +595,7 @@
 
 {% block form_help %}
     {% spaceless %}
-        {% if help_block %}<p class="help-block">{{ help_block|trans({}, translation_domain)|raw }}</p>{%endif %}
+        {% if help_block %}<p class="help-block">{{ help_block|trans({}, translation_domain)|raw }}</p>{% endif %}
         {% if help_block_tooltip.title %}
             &nbsp;{{ block('help_block_tooltip') }}
         {% endif %}
@@ -618,11 +659,26 @@
 
 {% block widget_addon %}
     {% spaceless %}
-        {% set widget_addon_icon = widget_addon.icon is defined ? widget_addon.icon : null  %}
-        {% set widget_addon_icon_inverted = widget_addon.icon_inverted is defined ? widget_addon.icon_inverted : false  %}
+        {% set widget_addon_icon = widget_addon.icon is defined ? widget_addon.icon : null %}
+        {% set widget_addon_icon_inverted = widget_addon.icon_inverted is defined ? widget_addon.icon_inverted : false %}
         <span class="input-group-addon">{{ (widget_addon.text|default(false) ? widget_addon.text|trans({}, translation_domain)|raw : opwoco_bootstrap_icon(widget_addon_icon, widget_addon_icon_inverted)) }}</span>
     {% endspaceless %}
 {% endblock widget_addon %}
+
+{% block widget_btns %}
+    {% spaceless %}
+        <span class="input-group-btn">
+    {% for widget_btn in widget_btns %}
+        <button type="{{ widget_btn.type | default('button') }}"
+                class="{{ 'btn ' ~ widget_btn.class | default('btn-default') }}">
+            {% if widget_btn.icon is not empty %}
+                {{ opwoco_bootstrap_icon(widget_btn.icon, widget_btn.icon_inverted | default(false)) }}
+            {% endif %}
+            {{ widget_btn.label | default("") | trans({}, translation_domain) }}</button>
+    {% endfor %}
+    </span>
+    {% endspaceless %}
+{% endblock widget_btns %}
 
 {# Errors #}
 
@@ -642,11 +698,11 @@
                         {{ flash('danger', error.message) }}
                     {% endfor %}
                 {% else %}
-                    <span class="help-{{ block('error_type') }}">
-            {% for error in errors %}
-                {{ error.message }} <br>
-            {% endfor %}
-            </span>
+                    <span class="help-{{- block('error_type') -}}">
+                        {%- for error in errors %}
+                            {{ error.message }}<br>
+                        {% endfor %}
+                    </span>
                 {% endif %}
             {% endif %}
         {% endif %}
@@ -655,51 +711,51 @@
 
 {# used to determine which type of error #}
 
-{% block error_type %}
+{% block error_type -%}
     {% spaceless %}
         {% if error_type %}
-            {{ error_type }}
+            {{- error_type -}}
         {% elseif form.parent == null %}
             {{ form.vars.error_type | default('inline') }}
         {% else %}
             block
         {% endif %}
     {% endspaceless %}
-{% endblock error_type %}
+{%- endblock error_type %}
 
 {# widget helper blocks #}
 
 {% block widget_form_group_start %}
 {% if widget_form_group|default(false) or form.parent == null %}
     {% if form.parent is not null and 'collection' in form.parent.vars.block_prefixes %} {# i am a collection child #}
-    {% if not omit_collection_item %}
-        {# collection item wrapper doesnt need form-group it gets added to childs anyways #}
-        {% set widget_form_group_attr = widget_form_group_attr|merge({class: 'collection-item'}) %}
+        {% if not omit_collection_item %}
+            {# collection item wrapper doesnt need form-group it gets added to childs anyways #}
+        	{% set widget_form_group_attr = widget_form_group_attr|merge({class: 'collection-item'}) %}
+        {% endif %}
     {% endif %}
-{% endif %}
     {% if errors|length > 0 %}
-    {# Add Error Class to Widget Wrapper#}
-    {% set widget_form_group_attr = widget_form_group_attr|merge({'class': widget_form_group_attr.class|default('') ~ ' has-error'}) %}
-{% endif %}
+	    {# Add Error Class to Widget Wrapper#}
+	    {% set widget_form_group_attr = widget_form_group_attr|merge({'class': widget_form_group_attr.class|default('') ~ ' has-error'}) %}
+    {% endif %}
     {% if help_widget_popover.selector is sameas(null) %}
-    {% set help_widget_popover = help_widget_popover|merge({'selector': '#' ~ id }) %}
-{% endif %}
+        {% set help_widget_popover = help_widget_popover|merge({'selector': '#' ~ id }) %}
+    {% endif %}
     <div{% if help_widget_popover.title is not sameas(null) %}{{ block('help_widget_popover') }}{% endif %} {% for attrname,attrvalue in widget_form_group_attr %} {{attrname}}="{{attrvalue}}"{% endfor %}>
     {# a form item containing the field in block_prefixes is a near subform or a field directly #}
     {% if (form|length > 0 and form.parent != null)
-and 'field' not in form.vars.block_prefixes
-and 'date' not in form.vars.block_prefixes %}
-    {% if show_child_legend%}
-        {{ block('form_legend') }}
-    {% elseif label_render %}
-        {{ form_label(form, label|default(null)) }}
+        and 'field' not in form.vars.block_prefixes
+        and 'date' not in form.vars.block_prefixes %}
+        {% if show_child_legend%}
+            {{ block('form_legend') }}
+        {% elseif label_render %}
+            {{ form_label(form, label|default(null)) }}
+        {% else %}
+        {% endif %}
     {% else %}
+        {% if label_render %}
+            {{ form_label(form, label|default(null)) }}
+        {% endif %}
     {% endif %}
-{% else %}
-    {% if label_render %}
-        {{ form_label(form, label|default(null)) }}
-    {% endif %}
-{% endif %}
 {% else %}
     {% if label_render %}
         {{ form_label(form, label|default(null)) }}
@@ -710,7 +766,7 @@ and 'date' not in form.vars.block_prefixes %}
 {% block help_widget_popover %}
     {% spaceless %}
         {% for attrname,attrvalue in help_widget_popover %}
-            data-{{attrname}}="{{attrvalue|trans({}, domain|default('messages'))}}"
+            data-{{ attrname }}="{{ attrvalue|trans({}, domain|default('messages')) }}"
         {% endfor %}
     {% endspaceless %}
 {% endblock help_widget_popover %}
