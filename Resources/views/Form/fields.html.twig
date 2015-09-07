@@ -700,7 +700,7 @@
                 {% else %}
                     <span class="help-{{- block('error_type') -}}">
                         {%- for error in errors %}
-                            {{ error.message }}<br>
+                            {{- error.message -}}<br>
                         {% endfor %}
                     </span>
                 {% endif %}
