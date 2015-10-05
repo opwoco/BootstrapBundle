@@ -1,0 +1,14 @@
+/*!
+ * OpwocoBootstrapBundle pagination support
+ */
+.pagination .disabled a,
+.pagination .disabled a:hover {
+  background-color: transparent;
+  text-decoration: none;
+  color: #BFBFBF;
+  cursor: default;
+}
+.pagination .next a {
+  border-right: 1px solid;
+  border-right-color: rgba(0, 0, 0, 0.15);
+}
