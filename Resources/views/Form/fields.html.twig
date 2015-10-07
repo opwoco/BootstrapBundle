@@ -543,7 +543,9 @@
     {% if 'tab' in form.vars.block_prefixes %}
         {{ block('form_tab') }}
     {% elseif embed_form is same as(true) %}
-        {{ widget_prefix|trans({}, translation_domain)|raw }} {{ form_widget(form, _context) }} {{ widget_suffix|trans({}, translation_domain)|raw }}
+        {% if widget_prefix|default %}{{ widget_prefix|trans({}, translation_domain)|raw }} {% endif %}
+        {{ form_widget(form, _context) }}
+        {% if widget_suffix|default %} {{ widget_suffix|trans({}, translation_domain)|raw }}{% endif %}
     {% else %}
         {{ block('widget_form_group_start') }}
 
@@ -556,8 +558,9 @@
             {% if show_horizontal_wrapper %}
                 <div class="{{ horizontal_input_wrapper_class }}">
             {% endif %}
-
-            {{ widget_prefix|trans({}, translation_domain)|raw }} {{ form_widget(form, _context) }} {{ widget_suffix|trans({}, translation_domain)|raw }}
+            {% if widget_prefix|default %}{{ widget_prefix|trans({}, translation_domain)|raw }} {% endif %}
+                {{ form_widget(form, _context) }}
+             {% if widget_suffix|default %} {{ widget_suffix|trans({}, translation_domain)|raw }}{% endif %}
 
             {% set type = type|default('text') %}
             {% if type != 'hidden' %}
