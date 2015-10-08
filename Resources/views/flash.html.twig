@@ -1,12 +1,20 @@
-{% macro flash(type, message, close, use_raw, class, domain) %}
+{% macro flash(type, message, close, use_raw, class, use_translator, domain) %}
     <div class="alert{{ type ? ' alert-'~type : '' }} fade in {{ class|default('') }} {% if close|default(false) %}alert-dismissible{% endif %}">
     {% if close|default(false) %}
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {% endif %}
     {% if use_raw|default(false) %}
-        {{ message|trans({}, domain|default('messages'))|raw }}
+        {% if use_translator|default(true) %}
+            {{ message|trans({}, domain|default('messages'))|raw }}
+        {% else %}
+            {{ message|raw }}
+        {% endif %}
     {% else %}
-        {{ message|trans({}, domain|default('messages')) }}
+        {% if use_translator|default(true) %}
+            {{ message|trans({}, domain|default('messages')) }}
+        {% else %}
+            {{ message }}
+        {% endif %}
     {% endif %}
     </div>
 {% endmacro %}
@@ -30,7 +38,7 @@
     </div>
 {% endmacro %}
 
-{% macro session_flash(close, use_raw, class, domain) %}
+{% macro session_flash(close, use_raw, class, use_translator, domain) %}
     {% import _self as flash_messages %}
 
     {% if app.session.flashbag.peekAll|length > 0 %}
@@ -46,7 +54,7 @@
                 {% set domain = 'FOSUserBundle' %}
             {% endif %}
             {% for message in messages %}
-                {{ flash_messages.flash(mapping[type], message, close, use_raw, class, domain) }}
+                {{ flash_messages.flash(mapping[type], message, close, use_raw, class, use_translator, domain) }}
             {% endfor %}
         {% endfor %}
     {% endif %}
