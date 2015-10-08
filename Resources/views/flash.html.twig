@@ -19,7 +19,7 @@
     </div>
 {% endmacro %}
 
-{% macro advanced_flash(type, heading, message, close_tag, use_raw, class, domain) %}
+{% macro advanced_flash(type, heading, message, close_tag, use_raw, class, use_translator, domain) %}
     <div class="alert{{ type ? ' alert-'~type : '' }} fade in {{ class|default('') }} {% if close_tag|default(false) %}alert-dismissible{% endif %}">
     {% if close_tag|default(false) %}
         {% if close_tag == true %}
@@ -31,9 +31,17 @@
     <h4 class="alert-heading">{{ heading }}</h4>
     {% endif %}
     {% if use_raw|default(false) %}
-        {{ message|trans({}, domain|default('messages'))|raw }}
+        {% if use_translator|default(true) %}
+            {{ message|trans({}, domain|default('messages'))|raw }}
+        {% else %}
+            {{ message|raw }}
+        {% endif %}
     {% else %}
-        {{ message|trans({}, domain|default('messages')) }}
+        {% if use_translator|default(true) %}
+            {{ message|trans({}, domain|default('messages')) }}
+        {% else %}
+            {{ message }}
+        {% endif %}
     {% endif %}
     </div>
 {% endmacro %}
