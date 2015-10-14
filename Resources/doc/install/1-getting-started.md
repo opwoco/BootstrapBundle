@@ -76,10 +76,10 @@ Installation
     {
         "scripts": {
             "post-install-cmd": [
-                "opwoco\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
+                "opwoco\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
             ],
             "post-update-cmd": [
-                "opwoco\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
+                "opwoco\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
             ]
         }
     }
@@ -91,10 +91,10 @@ Installation
     {
         "scripts": {
             "post-install-cmd": [
-                "opwoco\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrapSass"
+                "opwoco\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrapSass"
             ],
             "post-update-cmd": [
-                "opwoco\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrapSass"
+                "opwoco\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrapSass"
             ]
         }
     }
