@@ -19,6 +19,7 @@
             "opwoco\\BootstrapBundle\\": ""
         }
     },
+    "target-dir": "opwoco/Bundle/BootstrapBundle",
     "require": {
         "symfony/framework-bundle": "~2.3",
         "symfony/twig-bundle": "~2.3|~3.0",
