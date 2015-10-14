@@ -41,7 +41,7 @@ php app/console opwoco:bootstrap:symlink:sass <comment>--manual</comment> <pathT
 Defaults if installed by composer would be :
 
 pathToTwitterBootstrapSass: ../../../../../../../vendor/twbs/bootstrap-sass
-pathToOpwocoBootstrapBundle:  vendor/opwoco/bootstrap-bundle/Resources/bootstrap
+pathToOpwocoBootstrapBundle:  vendor/opwoco/bootstrap-bundle/opwoco/Bundle/BootstrapBundle/Resources/bootstrap
 
 EOT
             );
