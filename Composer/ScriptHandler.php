@@ -7,12 +7,12 @@
  * file that was distributed with this source code.
  */
 
-namespace opwoco\BootstrapBundle\Composer;
+namespace opwoco\Bundle\BootstrapBundle\Composer;
 
 use Composer\Script\Event;
 use Mopa\Bridge\Composer\Util\ComposerPathFinder;
-use opwoco\BootstrapBundle\Command\BootstrapSymlinkLessCommand;
-use opwoco\BootstrapBundle\Command\BootstrapSymlinkSassCommand;
+use opwoco\Bundle\BootstrapBundle\Command\BootstrapSymlinkLessCommand;
+use opwoco\Bundle\BootstrapBundle\Command\BootstrapSymlinkSassCommand;
 
 /**
  * Script for Composer, create symlink to bootstrap lib into the BootstrapBundle.

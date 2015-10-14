@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace opwoco\BootstrapBundle\Twig;
+namespace opwoco\Bundle\BootstrapBundle\Twig;
 
 /**
  * Twig extension for form.

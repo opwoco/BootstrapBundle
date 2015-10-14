@@ -1,6 +1,6 @@
 parameters:
 
-    opwoco_bootstrap.twig.extension.initializr.class: opwoco\BootstrapBundle\Twig\InitializrTwigExtension
+    opwoco_bootstrap.twig.extension.initializr.class: opwoco\Bundle\BootstrapBundle\Twig\InitializrTwigExtension
 
 
 services:

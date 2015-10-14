@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace opwoco\BootstrapBundle;
+namespace opwoco\Bundle\BootstrapBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use opwoco\BootstrapBundle\DependencyInjection\Compiler\FormPass;
+use opwoco\Bundle\BootstrapBundle\DependencyInjection\Compiler\FormPass;
 
 class opwocoBootstrapBundle extends Bundle
 {

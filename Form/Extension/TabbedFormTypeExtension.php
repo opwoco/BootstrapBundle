@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace opwoco\BootstrapBundle\Form\Extension;
+namespace opwoco\Bundle\BootstrapBundle\Form\Extension;
 
 use Mopa\Bundle\BootstrapBundle\Form\Type\TabsType;
 use Symfony\Component\Form\AbstractTypeExtension;

@@ -1,21 +1,21 @@
 parameters:
 
-    opwoco_bootstrap.form.type_extension.embed_form.class: opwoco\BootstrapBundle\Form\Extension\EmbedFormExtension
-    opwoco_bootstrap.form.type_extension.static_text.class: opwoco\BootstrapBundle\Form\Extension\StaticTextExtension
-    opwoco_bootstrap.form.type_extension.offset_button.class: opwoco\BootstrapBundle\Form\Extension\OffsetButtonExtension
-    opwoco_bootstrap.form.type_extension.button.class: opwoco\BootstrapBundle\Form\Extension\IconButtonExtension
-    opwoco_bootstrap.form.type_extension.help.class: opwoco\BootstrapBundle\Form\Extension\HelpFormTypeExtension
-    opwoco_bootstrap.form.type_extension.legend.class: opwoco\BootstrapBundle\Form\Extension\LegendFormTypeExtension
-    opwoco_bootstrap.form.type_extension.error.class: opwoco\BootstrapBundle\Form\Extension\ErrorTypeFormTypeExtension
-    opwoco_bootstrap.form.type_extension.widget.class: opwoco\BootstrapBundle\Form\Extension\WidgetFormTypeExtension
-    opwoco_bootstrap.form.type_extension.horizontal.class: opwoco\BootstrapBundle\Form\Extension\HorizontalFormTypeExtension
-    opwoco_bootstrap.form.type_extension.widget_collection.class: opwoco\BootstrapBundle\Form\Extension\WidgetCollectionFormTypeExtension
-    opwoco_bootstrap.form.type_extension.date.class: opwoco\BootstrapBundle\Form\Extension\DateTypeExtension
-    opwoco_bootstrap.form.type_extension.datetime.class: opwoco\BootstrapBundle\Form\Extension\DatetimeTypeExtension
-    opwoco_bootstrap.form.type_extension.time.class: opwoco\BootstrapBundle\Form\Extension\TimeTypeExtension
-    opwoco_bootstrap.form.type_extension.tabbed.class: opwoco\BootstrapBundle\Form\Extension\TabbedFormTypeExtension
-    opwoco_bootstrap.form.type.tab.class: opwoco\BootstrapBundle\Form\Type\TabType
-    opwoco_bootstrap.form.type.form_actions.class: opwoco\BootstrapBundle\Form\Type\FormActionsType
+    opwoco_bootstrap.form.type_extension.embed_form.class: opwoco\Bundle\BootstrapBundle\Form\Extension\EmbedFormExtension
+    opwoco_bootstrap.form.type_extension.static_text.class: opwoco\Bundle\BootstrapBundle\Form\Extension\StaticTextExtension
+    opwoco_bootstrap.form.type_extension.offset_button.class: opwoco\Bundle\BootstrapBundle\Form\Extension\OffsetButtonExtension
+    opwoco_bootstrap.form.type_extension.button.class: opwoco\Bundle\BootstrapBundle\Form\Extension\IconButtonExtension
+    opwoco_bootstrap.form.type_extension.help.class: opwoco\Bundle\BootstrapBundle\Form\Extension\HelpFormTypeExtension
+    opwoco_bootstrap.form.type_extension.legend.class: opwoco\Bundle\BootstrapBundle\Form\Extension\LegendFormTypeExtension
+    opwoco_bootstrap.form.type_extension.error.class: opwoco\Bundle\BootstrapBundle\Form\Extension\ErrorTypeFormTypeExtension
+    opwoco_bootstrap.form.type_extension.widget.class: opwoco\Bundle\BootstrapBundle\Form\Extension\WidgetFormTypeExtension
+    opwoco_bootstrap.form.type_extension.horizontal.class: opwoco\Bundle\BootstrapBundle\Form\Extension\HorizontalFormTypeExtension
+    opwoco_bootstrap.form.type_extension.widget_collection.class: opwoco\Bundle\BootstrapBundle\Form\Extension\WidgetCollectionFormTypeExtension
+    opwoco_bootstrap.form.type_extension.date.class: opwoco\Bundle\BootstrapBundle\Form\Extension\DateTypeExtension
+    opwoco_bootstrap.form.type_extension.datetime.class: opwoco\Bundle\BootstrapBundle\Form\Extension\DatetimeTypeExtension
+    opwoco_bootstrap.form.type_extension.time.class: opwoco\Bundle\BootstrapBundle\Form\Extension\TimeTypeExtension
+    opwoco_bootstrap.form.type_extension.tabbed.class: opwoco\Bundle\BootstrapBundle\Form\Extension\TabbedFormTypeExtension
+    opwoco_bootstrap.form.type.tab.class: opwoco\Bundle\BootstrapBundle\Form\Type\TabType
+    opwoco_bootstrap.form.type.form_actions.class: opwoco\Bundle\BootstrapBundle\Form\Type\FormActionsType
 
 services:
 

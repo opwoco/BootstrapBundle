@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace opwoco\BootstrapBundle\Command;
+namespace opwoco\Bundle\BootstrapBundle\Command;
 
 /**
  * Command to create Bootstrap symlink to OpwocoBootstrapBundle.

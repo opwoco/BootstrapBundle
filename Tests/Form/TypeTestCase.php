@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace opwoco\BootstrapBundle\Tests\Form;
+namespace opwoco\Bundle\BootstrapBundle\Tests\Form;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use opwoco\BootstrapBundle\Form\Extension as opwocoExtensions;
-use opwoco\BootstrapBundle\Form\Type as opwocoTypes;
+use opwoco\Bundle\BootstrapBundle\Form\Extension as opwocoExtensions;
+use opwoco\Bundle\BootstrapBundle\Form\Type as opwocoTypes;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
- * opwoco\BootstrapBundle\Tests\Form\TypeTestCase
+ * opwoco\Bundle\BootstrapBundle\Tests\Form\TypeTestCase
  *
  */
 class TypeTestCase extends KernelTestCase

@@ -1,9 +1,9 @@
 <?php
 
-namespace opwoco\BootstrapBundle\Entity;
+namespace opwoco\Bundle\BootstrapBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use opwoco\BootstrapBundle\Constant\IconSet;
+use opwoco\Bundle\BootstrapBundle\Constant\IconSet;
 
 /**
  * BootstrapIconRepository

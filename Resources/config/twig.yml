@@ -1,8 +1,8 @@
 parameters:
 
-    opwoco_bootstrap.twig.extension.form.class: opwoco\BootstrapBundle\Twig\FormExtension
-    opwoco_bootstrap.twig.extension.icon.class: opwoco\BootstrapBundle\Twig\IconExtension
-    opwoco_bootstrap.twig.extension.flash.class: opwoco\BootstrapBundle\Twig\FlashExtension
+    opwoco_bootstrap.twig.extension.form.class: opwoco\Bundle\BootstrapBundle\Twig\FormExtension
+    opwoco_bootstrap.twig.extension.icon.class: opwoco\Bundle\BootstrapBundle\Twig\IconExtension
+    opwoco_bootstrap.twig.extension.flash.class: opwoco\Bundle\BootstrapBundle\Twig\FlashExtension
 
 
 services:

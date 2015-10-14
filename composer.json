@@ -16,7 +16,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "opwoco\\BootstrapBundle\\": ""
+            "opwoco\\Bundle\\BootstrapBundle\\": ""
         }
     },
     "require": {
@@ -44,10 +44,10 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "opwoco\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
+            "opwoco\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
         ],
         "post-update-cmd": [
-            "opwoco\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
+            "opwoco\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
         ]
 
     },

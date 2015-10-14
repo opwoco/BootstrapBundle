@@ -1,6 +1,6 @@
 <?php
 
-namespace opwoco\BootstrapBundle\Tests\Form;
+namespace opwoco\Bundle\BootstrapBundle\Tests\Form;
 
 class LegendLayoutTest extends AbstractDivLayoutTest
 {

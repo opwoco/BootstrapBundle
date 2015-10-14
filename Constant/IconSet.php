@@ -1,6 +1,6 @@
 <?php
 
-namespace opwoco\BootstrapBundle\Constant;
+namespace opwoco\Bundle\BootstrapBundle\Constant;
 
 
 class IconSet
