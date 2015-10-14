@@ -1,7 +1,7 @@
 parameters:
 
-    opwoco_bootstrap.twig.extension.menu.class: opwoco\Bundle\BootstrapBundle\Twig\MenuExtension
-    opwoco_bootstrap.menu.extension.class: opwoco\Bundle\BootstrapBundle\Menu\Factory\MenuExtension
+    opwoco_bootstrap.twig.extension.menu.class: opwoco\BootstrapBundle\Twig\MenuExtension
+    opwoco_bootstrap.menu.extension.class: opwoco\BootstrapBundle\Menu\Factory\MenuExtension
 
 
 services:

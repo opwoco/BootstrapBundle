@@ -1,6 +1,6 @@
 <?php
 
-namespace opwoco\Bundle\BootstrapBundle\Form\Type;
+namespace opwoco\BootstrapBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ButtonBuilder;
@@ -15,7 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * Adds support for form actions, printing buttons in a single line, and correctly offset.
  *
- * @package opwoco\Bundle\BootstrapBundle\Form\Type
+ * @package opwoco\BootstrapBundle\Form\Type
  */
 class FormActionsType extends AbstractType
 {

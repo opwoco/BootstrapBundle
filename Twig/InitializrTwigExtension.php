@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace opwoco\Bundle\BootstrapBundle\Twig;
+namespace opwoco\BootstrapBundle\Twig;
 
 /**
  * Reads Initializr configuration file and generates

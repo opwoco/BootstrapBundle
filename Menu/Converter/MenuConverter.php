@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-namespace opwoco\Bundle\BootstrapBundle\Menu\Converter;
+namespace opwoco\BootstrapBundle\Menu\Converter;
 
-use opwoco\Bundle\BootstrapBundle\Menu\Factory\MenuDecorator;
+use opwoco\BootstrapBundle\Menu\Factory\MenuDecorator;
 use Knp\Menu\ItemInterface;
 
 /**

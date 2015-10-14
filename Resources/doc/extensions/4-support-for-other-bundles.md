@@ -86,7 +86,7 @@ The example shows the usage within a `Navbar`, however it works with any `knp_me
 
 namespace Acme\Bundle\AcmeDemoBundle\Menu;
 
-use opwoco\Bundle\BootstrapBundle\Navbar\AbstractNavbarMenuBuilder;
+use opwoco\BootstrapBundle\Navbar\AbstractNavbarMenuBuilder;
 
 class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
 {

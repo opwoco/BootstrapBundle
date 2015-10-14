@@ -7,10 +7,10 @@
  * file that was distributed with this source code.
  */
 
-namespace opwoco\Bundle\BootstrapBundle\Twig;
+namespace opwoco\BootstrapBundle\Twig;
 
 use Doctrine\ORM\EntityManager;
-use opwoco\Bundle\BootstrapBundle\Constant\IconSet;
+use opwoco\BootstrapBundle\Constant\IconSet;
 use Symfony\Component\HttpFoundation\Response;
 
 /**

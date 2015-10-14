@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace opwoco\Bundle\BootstrapBundle\Menu\Factory;
+namespace opwoco\BootstrapBundle\Menu\Factory;
 
 use Knp\Menu\Factory\ExtensionInterface;
 

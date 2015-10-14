@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace opwoco\Bundle\BootstrapBundle\Command;
+namespace opwoco\BootstrapBundle\Command;
 
 use Mopa\Bridge\Composer\Adapter\ComposerAdapter;
 use Mopa\Bridge\Composer\Util\ComposerPathFinder;

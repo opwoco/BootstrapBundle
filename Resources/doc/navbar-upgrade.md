@@ -26,7 +26,7 @@ services:
 Your navbar class will probably look something like this:
 
 ```php
-use opwoco\Bundle\BootstrapBundle\Navbar\AbstractNavbarMenuBuilder;
+use opwoco\BootstrapBundle\Navbar\AbstractNavbarMenuBuilder;
 
 class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
 {

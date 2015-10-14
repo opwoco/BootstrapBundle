@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-namespace opwoco\Bundle\BootstrapBundle\Twig;
+namespace opwoco\BootstrapBundle\Twig;
 
-use opwoco\Bundle\BootstrapBundle\Menu\Converter\MenuConverter;
+use opwoco\BootstrapBundle\Menu\Converter\MenuConverter;
 use Knp\Menu\Twig\Helper;
 use Knp\Menu\ItemInterface;
 

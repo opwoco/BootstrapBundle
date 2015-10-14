@@ -1,6 +1,6 @@
 <?php
 
-namespace opwoco\Bundle\BootstrapBundle\Entity;
+namespace opwoco\BootstrapBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

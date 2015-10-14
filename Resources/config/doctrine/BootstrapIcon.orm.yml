@@ -1,7 +1,7 @@
-opwoco\Bundle\BootstrapBundle\Entity\BootstrapIcon:
+opwoco\BootstrapBundle\Entity\BootstrapIcon:
     type: entity
     table: opwoco_bootstrap_icons
-    repositoryClass: opwoco\Bundle\BootstrapBundle\Entity\BootstrapIconRepository
+    repositoryClass: opwoco\BootstrapBundle\Entity\BootstrapIconRepository
     fields:
         id:
             type: integer

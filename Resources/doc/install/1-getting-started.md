@@ -149,7 +149,7 @@ Installation
     {
         return array(
             // ...
-            new opwoco\Bundle\BootstrapBundle\opwocoBootstrapBundle(),
+            new opwoco\BootstrapBundle\opwocoBootstrapBundle(),
             // ...
         );
     }
@@ -163,7 +163,7 @@ Installation
     {
         return array(
             // ...
-            new opwoco\Bundle\BootstrapBundle\OpwocoBootstrapBundle(),
+            new opwoco\BootstrapBundle\OpwocoBootstrapBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Craue\FormFlowBundle\CraueFormFlowBundle(),

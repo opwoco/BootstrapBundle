@@ -1,16 +1,16 @@
 <?php
 
-namespace opwoco\Bundle\BootstrapBundle\Tests\Form;
+namespace opwoco\BootstrapBundle\Tests\Form;
 
-use opwoco\Bundle\BootstrapBundle\Form\Extension\ErrorTypeFormTypeExtension;
-use opwoco\Bundle\BootstrapBundle\Form\Extension\HelpFormTypeExtension;
-use opwoco\Bundle\BootstrapBundle\Form\Extension\HorizontalFormTypeExtension;
-use opwoco\Bundle\BootstrapBundle\Form\Extension\LegendFormTypeExtension;
-use opwoco\Bundle\BootstrapBundle\Form\Extension\StaticTextExtension;
-use opwoco\Bundle\BootstrapBundle\Form\Extension\TabbedFormTypeExtension;
-use opwoco\Bundle\BootstrapBundle\Form\Extension\WidgetFormTypeExtension;
-use opwoco\Bundle\BootstrapBundle\Twig\FormExtension as FormExtension2;
-use opwoco\Bundle\BootstrapBundle\Twig\IconExtension;
+use opwoco\BootstrapBundle\Form\Extension\ErrorTypeFormTypeExtension;
+use opwoco\BootstrapBundle\Form\Extension\HelpFormTypeExtension;
+use opwoco\BootstrapBundle\Form\Extension\HorizontalFormTypeExtension;
+use opwoco\BootstrapBundle\Form\Extension\LegendFormTypeExtension;
+use opwoco\BootstrapBundle\Form\Extension\StaticTextExtension;
+use opwoco\BootstrapBundle\Form\Extension\TabbedFormTypeExtension;
+use opwoco\BootstrapBundle\Form\Extension\WidgetFormTypeExtension;
+use opwoco\BootstrapBundle\Twig\FormExtension as FormExtension2;
+use opwoco\BootstrapBundle\Twig\IconExtension;
 
 use Symfony\Bridge\Twig\Extension\FormExtension;
 use Symfony\Bridge\Twig\Extension\TranslationExtension;
