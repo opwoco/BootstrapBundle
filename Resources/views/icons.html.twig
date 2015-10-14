@@ -1,20 +1,29 @@
+
+{% from _self import render_styles %}
 {# valid values for style are: 'lg' , '2x' , '3x' , '4x' , '5x' #}
 {% block fa -%}
-<i class="fa fa-{{ icon }}{{ inverted ? ' fa-inverse' : '' }}{{ icon_style ? ' icon-' ~  icon_style : '' }}"></i>
+<i class="fa fa-{{ icon }}{{ inverted ? ' fa-inverse' : '' -}}{{ _self.render_styles(icon_style|default('')) }}{{- inverted ? ' color-inverse' : '' }}"></i>
 {%- endblock %}
 
 {% block glyphicon -%}
-<span class="glyphicon glyphicon-{{ icon }}{{ icon_style ? ' icon-' ~  icon_style : '' }}{{ inverted ? ' color-inverse' : '' }}"></span>
+<span class="glyphicon glyphicon-{{ icon }}{{ _self.render_styles(icon_style|default('')) }}{{ inverted ? ' color-inverse' : '' }}"></span>
 {%- endblock %}
 
 {% block ion -%}
-    <i class="ionicons ion-{{ icon }}{{ icon_style ? ' icon-' ~  icon_style : '' }}{{ inverted ? ' color-inverse' : '' }}"></i>
+    <i class="ionicons ion-{{ icon }}{{ _self.render_styles(icon_style|default('')) }}{{ inverted ? ' color-inverse' : '' }}"></i>
 {%- endblock %}
 
 {% block octicon -%}
-    <span class="octicon octicon-{{ icon }}{{ icon_style ? ' icon-' ~  icon_style : '' }}{{ inverted ? ' color-inverse' : '' }}"></span>
+    <span class="octicon octicon-{{ icon }}{{ _self.render_styles(icon_style|default('')) }}{{ inverted ? ' color-inverse' : '' }}"></span>
 {%- endblock %}
 
 {% block fi -%}
-    <span class="fi-{{ icon }}{{ icon_style ? ' icon-' ~  icon_style     : '' }}{{ inverted ? ' color-inverse' : '' }}"></span>
+    <span class="fi-{{ icon }}{{ _self.render_styles(icon_style|default('')) }}{{ inverted ? ' color-inverse' : '' }}"></span>
 {%- endblock %}
+
+{%- macro render_styles(icon_style) -%}
+    {% set styles = icon_style|split(' ') -%}
+    {%- for style in styles -%}
+        {{- ' icon-' ~  style -}}
+    {%- endfor -%}
+{% endmacro %}
