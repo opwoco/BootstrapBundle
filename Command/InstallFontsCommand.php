@@ -11,7 +11,6 @@ namespace opwoco\Bundle\BootstrapBundle\Command;
 
 use opwoco\Bundle\BootstrapBundle\Constant\IconSet;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -19,7 +18,6 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Mopa\Bridge\Composer\Adapter\ComposerAdapter;
 use Mopa\Bridge\Composer\Util\ComposerPathFinder;
-use Symfony\Component\Validator\Constraints\Optional;
 
 /**
  * Command to create Bootstrap symlink to OpwocoBootstrapBundle.
