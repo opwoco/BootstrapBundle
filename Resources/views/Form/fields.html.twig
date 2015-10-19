@@ -88,7 +88,7 @@
             {% set attr = attr|merge({'class': attr.class|default('') ~ ' not-removable'}) %}
         {% endif %}
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ widget_form_control_class)|trim}) %}
-        {% if static_text is sameas(true) %}
+        {% if static_text is same as(true) %}
             <p class="form-control-static">{{ value }}</p>
         {% else %}
             {{ parent() }}
