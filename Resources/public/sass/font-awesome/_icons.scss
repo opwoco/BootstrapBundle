@@ -163,6 +163,7 @@
 .#{$fa-css-prefix}-github:before { content: $fa-var-github; }
 .#{$fa-css-prefix}-unlock:before { content: $fa-var-unlock; }
 .#{$fa-css-prefix}-credit-card:before { content: $fa-var-credit-card; }
+.#{$fa-css-prefix}-feed:before,
 .#{$fa-css-prefix}-rss:before { content: $fa-var-rss; }
 .#{$fa-css-prefix}-hdd-o:before { content: $fa-var-hdd-o; }
 .#{$fa-css-prefix}-bullhorn:before { content: $fa-var-bullhorn; }
@@ -492,6 +493,8 @@
 .#{$fa-css-prefix}-empire:before { content: $fa-var-empire; }
 .#{$fa-css-prefix}-git-square:before { content: $fa-var-git-square; }
 .#{$fa-css-prefix}-git:before { content: $fa-var-git; }
+.#{$fa-css-prefix}-y-combinator-square:before,
+.#{$fa-css-prefix}-yc-square:before,
 .#{$fa-css-prefix}-hacker-news:before { content: $fa-var-hacker-news; }
 .#{$fa-css-prefix}-tencent-weibo:before { content: $fa-var-tencent-weibo; }
 .#{$fa-css-prefix}-qq:before { content: $fa-var-qq; }

@@ -55,22 +55,19 @@ class IconExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function initRuntime(\Twig_Environment $environment)
-    {
-        $this->environment = $environment;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getFunctions()
     {
+        $options = array(
+            'is_safe' => array('html'),
+            'needs_environment' => true,
+        );
+
         $functions = array(
-            new \Twig_SimpleFunction('opwoco_bootstrap_icon', array($this, 'renderIcon'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('opwoco_bootstrap_icon', array($this, 'renderIcon'), $options),
         );
 
         if ($this->shortcut) {
-            $functions[] = new \Twig_SimpleFunction($this->shortcut, array($this, 'renderIcon'), array('is_safe' => array('html')));
+            $functions[] = new \Twig_SimpleFunction($this->shortcut, array($this, 'renderIcon'), $options);
         }
 
         return $functions;
@@ -136,7 +133,6 @@ class IconExtension extends \Twig_Extension
         if ($this->iconTemplate === null) {
             $this->iconTemplate = $this->environment->loadTemplate('@opwocoBootstrap/icons.html.twig');
         }
-
         return $this->iconTemplate;
     }
 }

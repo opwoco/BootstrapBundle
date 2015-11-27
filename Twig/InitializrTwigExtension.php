@@ -23,11 +23,6 @@ class InitializrTwigExtension extends \Twig_Extension
     protected $parameters;
 
     /**
-     * @var \Twig_Environment
-     */
-    protected $environment;
-
-    /**
      * Constructor.
      *
      * @param array $parameters
@@ -35,14 +30,6 @@ class InitializrTwigExtension extends \Twig_Extension
     public function __construct(array $parameters = array())
     {
         $this->parameters = $parameters;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function initRuntime(\Twig_Environment $environment)
-    {
-        $this->environment = $environment;
     }
 
     /**

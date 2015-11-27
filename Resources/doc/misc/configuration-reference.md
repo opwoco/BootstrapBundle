@@ -77,7 +77,7 @@ opwoco_bootstrap:
             description:          OpwocoBootstrapBundle
             keywords:             OpwocoBootstrapBundle, Twitter Bootstrap, HTML5 Boilerplate
             author_name:          My name
-            author_url:           #
+            author_url:           http://...
             feed_atom:            ~
             feed_rss:             ~
             sitemap:              ~
@@ -90,7 +90,7 @@ opwoco_bootstrap:
         google:
             wt:                   ~
             analytics:            ~
-	    extendedanalytics:    false
+            extendedanalytics:    false
         diagnostic_mode:      false
 
     flash:
