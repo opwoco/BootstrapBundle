@@ -20,11 +20,6 @@ use Symfony\Component\HttpFoundation\Response;
 class IconExtension extends \Twig_Extension
 {
     /**
-     * @var \Twig_Environment
-     */
-    protected $environment;
-
-    /**
      * @var \Doctrine\ORM\EntityManager
      */
     protected $entityManager;
@@ -81,9 +76,9 @@ class IconExtension extends \Twig_Extension
      *
      * @return Response
      */
-    public function renderIcon($icon, $iconSet = null, $iconStyle = null, $inverted = false)
+    public function renderIcon(\Twig_Environment $env, $icon, $iconSet = null, $iconStyle = null, $inverted = false)
     {
-        $template = $this->getIconTemplate();
+        $template = $this->getIconTemplate($env);
 
         $context = array(
             'icon' => $icon,
@@ -128,10 +123,10 @@ class IconExtension extends \Twig_Extension
     /**
      * @return \Twig_Template
      */
-    protected function getIconTemplate()
+    protected function getIconTemplate(\Twig_Environment $env)
     {
         if ($this->iconTemplate === null) {
-            $this->iconTemplate = $this->environment->loadTemplate('@opwocoBootstrap/icons.html.twig');
+            $this->iconTemplate = $env->loadTemplate('@opwocoBootstrap/icons.html.twig');
         }
         return $this->iconTemplate;
     }

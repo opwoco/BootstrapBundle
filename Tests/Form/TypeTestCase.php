@@ -89,21 +89,21 @@ class TypeTestCase extends KernelTestCase
             new opwocoExtensions\DateTypeExtension(
                 [
                     'date_wrapper_class' => [
-                        'year' => $this->container->getParameter('mopa_bootstrap.form.date_wrapper_class.year'),
-                        'month' => $this->container->getParameter('mopa_bootstrap.form.date_wrapper_class.month'),
-                        'day' => $this->container->getParameter('mopa_bootstrap.form.date_wrapper_class.day')
+                        'year' => $this->container->getParameter('opwoco_bootstrap.form.date_wrapper_class.year'),
+                        'month' => $this->container->getParameter('opwoco_bootstrap.form.date_wrapper_class.month'),
+                        'day' => $this->container->getParameter('opwoco_bootstrap.form.date_wrapper_class.day')
                     ]
                 ]
             ),
             new opwocoExtensions\ErrorTypeFormTypeExtension(
-                ['error_type' => $this->container->getParameter('mopa_bootstrap.form.error_type')]
+                ['error_type' => $this->container->getParameter('opwoco_bootstrap.form.error_type')]
             ),
             new opwocoExtensions\HelpFormTypeExtension(
                 [
                     'help_label_tooltip' => $this->container->getParameter('opwoco_bootstrap.form.help_label.tooltip'),
                     'help_label_popover' => $this->container->getParameter('opwoco_bootstrap.form.help_label.popover'),
-                    'help_block_tooltip' => $this->container->getParameter('mopa_bootstrap.form.help_block.tooltip'),
-                    'help_block_popover' => $this->container->getParameter('mopa_bootstrap.form.help_block.popover'),
+                    'help_block_tooltip' => $this->container->getParameter('opwoco_bootstrap.form.help_block.tooltip'),
+                    'help_block_popover' => $this->container->getParameter('opwoco_bootstrap.form.help_block.popover'),
                     'help_widget_popover' => $this->container->getParameter('opwoco_bootstrap.form.help_widget.popover')
                 ]
             ),

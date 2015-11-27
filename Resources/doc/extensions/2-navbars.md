@@ -5,7 +5,7 @@ Generating a Navbar
 
 We make use of KnpMenu and KnpMenuBundle in order to help in the generation of
 Bootstrap Menus and navbars. We also provide a pass-through function for `knp_menu_render`,
-`mopa_bootstrap_menu` which sets some default options for the menus.
+`opwoco_bootstrap_menu` which sets some default options for the menus.
 
 To learn how to create menus with KnpMenuBundle, [please check their documentation
 before continuing.](https://github.com/KnpLabs/KnpMenuBundle)

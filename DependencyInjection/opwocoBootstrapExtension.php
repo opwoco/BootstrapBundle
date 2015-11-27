@@ -53,8 +53,8 @@ class opwocoBootstrapExtension extends Extension
 
             // Set tags
             $types = array(
-                'mopa_bootstrap.form.type.tab' => 'tab',
-                'mopa_bootstrap.form.type.form_actions' => 'form_actions',
+                'opwoco_bootstrap.form.type.tab' => 'tab',
+                'opwoco_bootstrap.form.type.form_actions' => 'form_actions',
             );
             foreach ($types as $type => $alias) {
                 $typeDefinition = $container->getDefinition($type);
