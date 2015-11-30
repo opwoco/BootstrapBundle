@@ -30,6 +30,7 @@ class InstallFontsCommand extends ContainerAwareCommand
     //    IconSet::FOUNDATION => '',
         IconSet::IONICONS => 'driftyco/ionicons',
     //    IconSet::OCTICONS => '',
+        IconSet::MATERIAL => 'mervick/material-design-icons'
     );
 
     /**
@@ -42,9 +43,10 @@ class InstallFontsCommand extends ContainerAwareCommand
             ->setDescription("Install font to BootstrapBundel/Resources/public/fonts")
             ->addOption(IconSet::GLYPHICON, 'g', InputOption::VALUE_NONE, 'Installs gylphicon icons')
             ->addOption(IconSet::FONTAWESOME, 'a', InputOption::VALUE_NONE, 'Installs fontawesome icons')
-            ->addOption(IconSet::FOUNDATION, 'f', InputOption::VALUE_NONE, 'Installs gylphicon icons')
-            ->addOption(IconSet::IONICONS, 'i', InputOption::VALUE_NONE, 'Installs gylphicon icons')
-            ->addOption(IconSet::OCTICONS, 'o', InputOption::VALUE_NONE, 'Installs gylphicon icons')
+            ->addOption(IconSet::FOUNDATION, 'f', InputOption::VALUE_NONE, 'Installs foundation icons')
+            ->addOption(IconSet::IONICONS, 'i', InputOption::VALUE_NONE, 'Installs ion icons')
+            ->addOption(IconSet::OCTICONS, 'o', InputOption::VALUE_NONE, 'Installs octicon icons')
+            ->addOption(IconSet::MATERIAL, 'm', InputOption::VALUE_NONE, 'Installs material icons')
             ->setHelp(<<<EOT
 The <info>opwoco:bootstrap:install:font</info> command install the font configured to used into web/fonts directory
 
@@ -75,8 +77,9 @@ EOT
         $foundation = $input->getOption(IconSet::FOUNDATION);
         $ionicons = $input->getOption(IconSet::IONICONS);
         $octicons = $input->getOption(IconSet::OCTICONS);
+        $material = $input->getOption(IconSet::MATERIAL);
 
-        if ($glyphicon || $fontawesome || $foundation || $ionicons || $octicons) {
+        if ($glyphicon || $fontawesome || $foundation || $ionicons || $octicons || $material) {
 
             if (!$glyphicon) {
                 unset(self::$iconSets[IconSet::GLYPHICON]);
@@ -92,6 +95,9 @@ EOT
             }
             if (!$octicons) {
                 unset(self::$iconSets[IconSet::OCTICONS]);
+            }
+            if (!$material) {
+                unset(self::$iconSets[IconSet::MATERIAL]);
             }
         }
     }
@@ -140,12 +146,8 @@ EOT
             if ($sourcePackage) {
                 $bsbPath = $composer->getInstallationManager()->getInstallPath($sourcePackage);
 
-                if ($key == IconSet::GLYPHICON) {
-                    $fontPath = $bsbPath.DIRECTORY_SEPARATOR.'fonts';
-                }
-                else {
-                    $fontPath = $bsbPath.DIRECTORY_SEPARATOR.'fonts';
-                }
+                $fontPath = $bsbPath.DIRECTORY_SEPARATOR.'fonts';
+
                 $finder = new Finder();
                 $finder->files()->in($fontPath);
 

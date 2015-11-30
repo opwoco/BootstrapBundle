@@ -36,4 +36,9 @@ opwoco\Bundle\BootstrapBundle\Entity\BootstrapIcon:
             nullable: true
             options:
                 default: false
+        material:
+            type: boolean
+            nullable: true
+            options:
+                default: false
     lifecycleCallbacks: {  }

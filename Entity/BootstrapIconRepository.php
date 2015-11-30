@@ -45,6 +45,9 @@ class BootstrapIconRepository extends EntityRepository
                 $entity->setOcticons(true);
                 break;
             }
+            case IconSet::MATERIAL: {
+                $entity->setMaterial(true);
+            }
         }
 
         $em = $this->getEntityManager();

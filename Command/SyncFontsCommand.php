@@ -31,7 +31,10 @@ class SyncFontsCommand extends ContainerAwareCommand
         IconSet::FONTAWESOME => array('fa-lg', 'fa-2x', 'fa-3x', 'fa-4x', 'fa-5x', 'fa-fw', 'fa-ul', 'fa-li', 'fa-border', 'fa-pulse', 'fa-spin', 'fa-rotate', 'fa-flip', 'fa-stack'),
         IconSet::FOUNDATION => array(),
         IconSet::IONICONS => array(),
-        IconSet::OCTICONS => array()
+        IconSet::OCTICONS => array(),
+        IconSet::MATERIAL => array('mdi-2x', 'mdi-size-2x', 'mdi-3x', 'mdi-size-3x', 'mdi-4x', 'mdi-size-4x', 'mdi-5x', 'mdi-size-5x', 'mdi-fw', 'mdi-ul', 'mdi-li', 'mdi-border',
+            '.pull-left', 'pull-right', 'mdi.pull-left', 'mdi.pull-right', 'mdi-spin', 'mdi-pulse', 'mdi-rotate-90', 'mdi-rotate-180', 'mdi-rotate-270', 'mdi-flip-horizontal', 'mdi-flip-vertical',
+            'mdi-stack', 'mdi-stack-1x, .mdi-stack-2x', 'mdi-stack-2x', 'mdi-inverse'),
     );
 
     /**
@@ -77,6 +80,13 @@ class SyncFontsCommand extends ContainerAwareCommand
                 'Set "true" by default, if set octicons icons will be indexed in DB',
                 true
             )
+            ->addOption(
+                IconSet::MATERIAL,
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'Set "true" by default, if set material icons will be indexed in DB',
+                true
+            )
             ->setHelp(<<<EOT
 The <info>opwoco:bootstrap:install:fonts</info> command creates the DB table for all font-sets to provide a multiple lookup
 
@@ -94,6 +104,7 @@ EOT
         $indexFoundation = $input->getOption(IconSet::FOUNDATION);
         $indexIonicons = $input->getOption(IconSet::IONICONS);
         $indexOcticons = $input->getOption(IconSet::OCTICONS);
+        $indexMaterial = $input->getOption(IconSet::MATERIAL);
 
         // Building root path for all fontSets
         $composer = ComposerAdapter::getComposer($input, $output);
@@ -133,6 +144,12 @@ EOT
             $cssFile = $cssParser->parse();
             $identifers = $this->parseCSS($cssFile, IconSet::OCTICONS);
             $this->flushData($identifers, IconSet::OCTICONS);
+        }
+        if ($indexMaterial) {
+            $cssParser = new Parser(file_get_contents($fontsPath . 'material/material-icons.css'));
+            $cssFile = $cssParser->parse();
+            $identifers = $this->parseCSS($cssFile, IconSet::MATERIAL);
+            $this->flushData($identifers, IconSet::MATERIAL);
         }
 
     }
@@ -196,6 +213,9 @@ EOT
             }
             case IconSet::OCTICONS: {
                 return 'octicon-';
+            }
+            case IconSet::MATERIAL: {
+                return 'mdi-';
             }
             default: {
                 return false;

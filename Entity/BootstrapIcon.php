@@ -44,6 +44,11 @@ class BootstrapIcon
      */
     private $octicons;
 
+    /**
+     * @var boolean
+     */
+    private $material;
+
 
     /**
      * Get id
@@ -191,5 +196,28 @@ class BootstrapIcon
     public function getOcticons()
     {
         return $this->octicons;
+    }
+
+    /**
+     * Set material
+     *
+     * @param $material
+     * @return $this
+     */
+    public function setMaterial($material)
+    {
+        $this->material = $material;
+
+        return $this;
+    }
+
+    /**
+     * Get material
+     *
+     * @return bool
+     */
+    public function getMaterial()
+    {
+        return $this->material;
     }
 }
