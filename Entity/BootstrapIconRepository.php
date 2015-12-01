@@ -20,7 +20,7 @@ class BootstrapIconRepository extends EntityRepository
         /** @var BootstrapIcon $entity */
         $entity = $this->findIconByIdentifier($identifier);
         $isNew = false;
-        if (!$entity) {
+        if (!isset($entity)) {
             $entity = new BootstrapIcon();
             $isNew = true;
         }
@@ -47,15 +47,15 @@ class BootstrapIconRepository extends EntityRepository
             }
             case IconSet::MATERIAL: {
                 $entity->setMaterial(true);
+                break;
             }
         }
-
         $em = $this->getEntityManager();
         if ($isNew) {
             $entity->setIdentifier($identifier);
             $em->persist($entity);
         }
-        $em->flush();
+        $em->flush($entity);
     }
 
     private function findIconByIdentifier($identifer)

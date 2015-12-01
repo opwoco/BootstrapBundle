@@ -210,7 +210,7 @@ class Configuration implements ConfigurationInterface
 
     protected function addIconsConfig(ArrayNodeDefinition $rootNode)
     {
-        $iconSets = array('glyphicon', 'fa', 'ion', 'octicons', 'foundation');
+        $iconSets = array('glyphicon', 'fa', 'ion', 'octicons', 'foundation', 'mdi');
 
         $rootNode
             ->children()
@@ -255,8 +255,8 @@ class Configuration implements ConfigurationInterface
                                         ->thenInvalid('Must choose one of '.json_encode($iconSets))
                                     ->end()
                                 ->end()
-                                ->scalarNode('mfg')
-                                    ->defaultValue('mfg')
+                                ->scalarNode('material')
+                                    ->defaultValue('mdi')
                                     ->validate()
                                         ->ifNotInArray($iconSets)
                                         ->thenInvalid('Must choose one of '.json_encode($iconSets))

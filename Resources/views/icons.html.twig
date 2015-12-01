@@ -21,13 +21,15 @@
     <span class="fi-{{ icon }}{{ _self.render_styles(icon_style|default('')) }}{{ inverted ? ' color-inverse' : '' }}"></span>
 {%- endblock %}
 
-{% block fi -%}
-    <span class="mdi-{{ icon }}{{ _self.render_styles(icon_style|default('')) }}{{ inverted ? ' color-inverse' : '' }}"></span>
+{% block mdi -%}
+    <span class="mdi mdi-{{ icon }}{{ _self.render_styles(icon_style|default('')) }}{{ inverted ? ' color-inverse' : '' }}"></span>
 {%- endblock %}
 
 {%- macro render_styles(icon_style) -%}
     {% set styles = icon_style|split(' ') -%}
     {%- for style in styles -%}
-        {{- ' icon-' ~  style -}}
+        {% if style|length > 0 %}
+            {{- ' icon-' ~  style -}}
+        {% endif %}
     {%- endfor -%}
 {% endmacro %}

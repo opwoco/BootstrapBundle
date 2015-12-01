@@ -106,6 +106,9 @@ class IconExtension extends \Twig_Extension
                 else if ($entity->getOcticons()) {
                     return $template->renderBlock($this->iconSets[IconSet::OCTICONS], $context);
                 }
+                else if ($entity->getMaterial()) {
+                    return $template->renderBlock($this->iconSets[IconSet::MATERIAL], $context);
+                }
             }
 
         }
