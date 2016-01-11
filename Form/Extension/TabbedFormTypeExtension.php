@@ -122,8 +122,12 @@ class TabbedFormTypeExtension extends AbstractTypeExtension
 
         $activeTab->vars['tab_active'] = true;
         $tabs[$activeTab->vars['tab_index']]['active'] = true;
-
-        $tabsForm = $this->formFactory->create(new TabsType(), null, array(
+    
+        $tabsType = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
+            ? 'opwoco\Bundle\BootstrapBundle\Form\Type\TabsType'
+            : new TabsType() // SF <2.8 BC
+        ;
+        $tabsForm = $this->formFactory->create($tabsType, null, array(
             'tabs' => $tabs,
             'attr' => array(
                 'class' => $options['tabs_class'],
