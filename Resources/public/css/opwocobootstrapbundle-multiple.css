@@ -16741,3 +16741,7 @@ section {
 .btn-group .btn + .btn {
   margin-left: 0;
 }
+.navbar-toggle {
+  margin-top: 0;
+  margin-bottom: 0;
+}
