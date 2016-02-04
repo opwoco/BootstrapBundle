@@ -84,7 +84,7 @@ services:
     opwoco_bootstrap.form.type_extension.date:
         class: %opwoco_bootstrap.form.type_extension.date.class%
         arguments:
-            - { year: %opwoco_bootstrap.form.date_wrapper_class.year%, month: %opwoco_bootstrap.form.date_wrapper_class.month%, day: %opwoco_bootstrap.form.date_wrapper_class.day% }
+            - { date_wrapper_class: {year: %opwoco_bootstrap.form.date_wrapper_class.year%, month: %opwoco_bootstrap.form.date_wrapper_class.month%, day: %opwoco_bootstrap.form.date_wrapper_class.day% }}
         tags:
             - { name: form.type_extension, alias: date, extended_type: Symfony\Component\Form\Extension\Core\Type\DateType }
 
