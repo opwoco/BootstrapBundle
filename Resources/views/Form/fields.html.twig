@@ -658,8 +658,9 @@
 {% block widget_addon %}
     {% spaceless %}
         {% set widget_addon_icon = widget_addon.icon is defined ? widget_addon.icon : null %}
-        {% set widget_addon_icon_inverted = widget_addon.icon_inverted is defined ? widget_addon.icon_inverted : false %}
-        <span class="input-group-addon">{{ (widget_addon.text|default(false) ? widget_addon.text|trans({}, translation_domain)|raw : opwoco_bootstrap_icon(widget_addon_icon, widget_addon_icon_inverted)) }}</span>
+        {% set widget_addon_icon_set = widget_addon.iconset is defined ? widget_addon.iconset : 'glyphicon' %}
+        {% set widget_addon_icon_styles = widget_addon.iconstyles is defined ? widget_addon.iconstyles : null %}
+        <span class="input-group-addon">{{ (widget_addon.text|default(false) ? widget_addon.text|trans({}, translation_domain)|raw : opwoco_bootstrap_icon(widget_addon_icon, widget_addon_icon_set, widget_addon_icon_styles)) }}</span>
     {% endspaceless %}
 {% endblock widget_addon %}
 
