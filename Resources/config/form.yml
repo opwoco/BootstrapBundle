@@ -1,6 +1,7 @@
 parameters:
 
     opwoco_bootstrap.form.type_extension.embed_form.class: opwoco\Bundle\BootstrapBundle\Form\Extension\EmbedFormExtension
+    opwoco_bootstrap.form.type_extension.choice.class: opwoco\Bundle\BootstrapBundle\Form\Extension\ChoiceExtension
     opwoco_bootstrap.form.type_extension.static_text.class: opwoco\Bundle\BootstrapBundle\Form\Extension\StaticTextExtension
     opwoco_bootstrap.form.type_extension.offset_button.class: opwoco\Bundle\BootstrapBundle\Form\Extension\OffsetButtonExtension
     opwoco_bootstrap.form.type_extension.button.class: opwoco\Bundle\BootstrapBundle\Form\Extension\IconButtonExtension
@@ -23,6 +24,11 @@ services:
         class: %opwoco_bootstrap.form.type_extension.embed_form.class%
         tags:
             - { name: form.type_extension, alias: form, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+
+    opwoco_bootstrap.form.type_extension.choice:
+        class: %opwoco_bootstrap.form.type_extension.choice.class%
+        tags:
+            - { name: form.type_extension, alias: form, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }
 
     opwoco_bootstrap.form.type_extension.static_text:
         class: %opwoco_bootstrap.form.type_extension.static_text.class%

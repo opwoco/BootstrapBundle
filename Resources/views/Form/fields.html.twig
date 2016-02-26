@@ -43,17 +43,18 @@
     {% endspaceless %}
 {% endblock button_row %}
 
-
 {# Widgets #}
 
+
 {%- block choice_widget_collapsed -%}
-    {% set attr = attr|merge({'class': attr.class|default('') ~ ' ' ~ widget_form_control_class}) %}
+    {% set attr = attr|merge({'class': attr.class|default('') ~ ' form-control ' ~ widget_form_control_class|trim}) %}
     {%- if required and placeholder is none and not placeholder_in_choices and not multiple -%}
         {% set required = false %}
     {%- endif -%}
     <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
         {%- if placeholder is not none -%}
-            <option class="placeholder" value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder != '' ? (translation_domain is same as(false) ? placeholder : placeholder|trans({}, translation_domain)) }}</option>
+            <option class="placeholder"
+                    {%- if placeholder_attr is defined and placeholder_attr.color is defined %} style="color: {{ placeholder_attr.color }};"{% endif %} value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder != '' ? (translation_domain is same as(false) ? placeholder : placeholder|trans({}, translation_domain)) }}</option>
         {%- endif -%}
         {%- if preferred_choices|length > 0 -%}
             {% set options = preferred_choices %}
@@ -65,6 +66,29 @@
         {%- set options = choices -%}
         {{- block('choice_widget_options') -}}
     </select>
+    <script type="text/javascript">
+        var updateColor = function(select, defaultColor) {
+            var current = select.val();
+            if (current != '') {
+                select.css('color', defaultColor);
+            } else {
+                var placeholderOption = select.find('option:selected');
+                select.css('color', placeholderOption.css('color'));
+            }
+        };
+
+        $(document).ready(function() {
+
+            var select = $('#' + '{{ id }}');
+            var defaultColor = select.css('color');
+
+            updateColor(select, defaultColor);
+
+            select.change(function() {
+                updateColor(select, defaultColor);
+            });
+        });
+    </script>
 {%- endblock choice_widget_collapsed -%}
 
 {% block textarea_widget %}
