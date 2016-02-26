@@ -33,3 +33,6 @@
   margin-top: 0;
   margin-bottom: 0;
 }
+.form-control select > option.placeholder {
+  color: #999;
+}
