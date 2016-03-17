@@ -70,22 +70,21 @@
         var updateColor = function(select, defaultColor) {
             var current = select.val();
             if (current != '') {
-                select.css('color', defaultColor);
-            } else {
-                var placeholderOption = select.find('option:selected');
-                select.css('color', placeholderOption.css('color'));
+                select.removeClass('placeholder-color');
+                select.addClass('selected-color');
+            }
+            else {
+                select.addClass('placeholder-color');
+                select.removeClass('selected-color');
             }
         };
 
         $(document).ready(function() {
-
             var select = $('#' + '{{ id }}');
-            var defaultColor = select.css('color');
-
-            updateColor(select, defaultColor);
+            updateColor(select);
 
             select.change(function() {
-                updateColor(select, defaultColor);
+                updateColor(select);
             });
         });
     </script>
