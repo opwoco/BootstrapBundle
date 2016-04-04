@@ -1,7 +1,6 @@
 parameters:
 
     opwoco_bootstrap.form.type_extension.embed_form.class: opwoco\Bundle\BootstrapBundle\Form\Extension\EmbedFormExtension
-    opwoco_bootstrap.form.type_extension.choice.class: opwoco\Bundle\BootstrapBundle\Form\Extension\ChoiceExtension
     opwoco_bootstrap.form.type_extension.static_text.class: opwoco\Bundle\BootstrapBundle\Form\Extension\StaticTextExtension
     opwoco_bootstrap.form.type_extension.offset_button.class: opwoco\Bundle\BootstrapBundle\Form\Extension\OffsetButtonExtension
     opwoco_bootstrap.form.type_extension.button.class: opwoco\Bundle\BootstrapBundle\Form\Extension\IconButtonExtension
@@ -16,7 +15,7 @@ parameters:
     opwoco_bootstrap.form.type_extension.time.class: opwoco\Bundle\BootstrapBundle\Form\Extension\TimeTypeExtension
     opwoco_bootstrap.form.type_extension.tabbed.class: opwoco\Bundle\BootstrapBundle\Form\Extension\TabbedFormTypeExtension
     opwoco_bootstrap.form.type.tab.class: opwoco\Bundle\BootstrapBundle\Form\Type\TabType
-    opwoco_bootstrap.Symfony\Component\Form\Extension\Core\Type\FormType_actions.class: opwoco\Bundle\BootstrapBundle\Form\Type\FormActionsType
+    opwoco_bootstrap.form.type.form_actions.class: opwoco\Bundle\BootstrapBundle\Form\Type\FormActionsType
 
 services:
 
@@ -24,11 +23,6 @@ services:
         class: %opwoco_bootstrap.form.type_extension.embed_form.class%
         tags:
             - { name: form.type_extension, alias: form, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
-
-    opwoco_bootstrap.form.type_extension.choice:
-        class: %opwoco_bootstrap.form.type_extension.choice.class%
-        tags:
-            - { name: form.type_extension, alias: form, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }
 
     opwoco_bootstrap.form.type_extension.static_text:
         class: %opwoco_bootstrap.form.type_extension.static_text.class%
@@ -107,7 +101,7 @@ services:
     opwoco_bootstrap.form.type_extension.tabbed:
         class: %opwoco_bootstrap.form.type_extension.tabbed.class%
         arguments:
-            - @form.factory
+            - "@form.factory"
             - { class: %opwoco_bootstrap.form.tabs.class% }
         tags:
             - { name: form.type_extension, alias: form, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
@@ -118,6 +112,6 @@ services:
             - { name: form.type, alias: tab }
 
     opwoco_bootstrap.form.type.form_actions:
-        class: %opwoco_bootstrap.Symfony\Component\Form\Extension\Core\Type\FormType_actions.class%
+        class: %opwoco_bootstrap.form.type.form_actions.class%
         tags:
             - { name: form.type, alias: form_actions }
